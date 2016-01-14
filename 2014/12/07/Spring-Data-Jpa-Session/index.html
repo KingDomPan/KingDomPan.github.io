@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Spring-Data-Jpa-Open-Session-In-View | KingDomPan&#39;s Secret Garden</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="由于OOPS项目使用的数据库为mysql, 日前需要做自动装机的需求功能,使用了开源项目razor@github来实现自动装机功能,razor使用的数据库为postgresql9.X系列,  因此在web系统上使用的mysql就存在一个不平衡点了,就是razor端的数据如何获取的问题.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring-Data-Jpa-Open-Session-In-View">
+<meta property="og:url" content="http://yoursite.com/2014/12/07/Spring-Data-Jpa-Session/index.html">
+<meta property="og:site_name" content="KingDomPan's Secret Garden">
+<meta property="og:description" content="由于OOPS项目使用的数据库为mysql, 日前需要做自动装机的需求功能,使用了开源项目razor@github来实现自动装机功能,razor使用的数据库为postgresql9.X系列,  因此在web系统上使用的mysql就存在一个不平衡点了,就是razor端的数据如何获取的问题.">
+<meta property="og:updated_time" content="2016-01-14T03:44:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring-Data-Jpa-Open-Session-In-View">
+<meta name="twitter:description" content="由于OOPS项目使用的数据库为mysql, 日前需要做自动装机的需求功能,使用了开源项目razor@github来实现自动装机功能,razor使用的数据库为postgresql9.X系列,  因此在web系统上使用的mysql就存在一个不平衡点了,就是razor端的数据如何获取的问题.">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">KingDomPan</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">左手前端, 右手后端, 我, 全栈了!</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/KingDomPan" title="github">github</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Data/" style="font-size: 20px;">Data</a> <a href="/tags/Fiddler/" style="font-size: 10px;">Fiddler</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/JPA/" style="font-size: 10px;">JPA</a> <a href="/tags/JRebel/" style="font-size: 10px;">JRebel</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jpa/" style="font-size: 15px;">Jpa</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Seesion/" style="font-size: 10px;">Seesion</a> <a href="/tags/Spring/" style="font-size: 20px;">Spring</a> <a href="/tags/Spring-Security-安全验证/" style="font-size: 10px;">Spring Security 安全验证</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">左手前端, 右手后端, 我, 全栈了!</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">KingDomPan</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="null" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">KingDomPan</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">左手前端, 右手后端, 我, 全栈了!</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/KingDomPan" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-Spring-Data-Jpa-Session" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/12/07/Spring-Data-Jpa-Session/" class="article-date">
+  	<time datetime="2014-12-07T12:06:39.000Z" itemprop="datePublished">2014-12-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Spring-Data-Jpa-Open-Session-In-View
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data/">Data</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jpa/">Jpa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Seesion/">Seesion</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Spring/">Spring</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>由于OOPS项目使用的数据库为mysql, 日前需要做自动装机的需求功能,<br>使用了开源项目razor<a href="https://github.com/puppetlabs/razor-server" target="_blank" rel="external">@github</a>来实现自动装机功能,<br>razor使用的数据库为postgresql9.X系列,  因此在web系统上使用的mysql就存在一个不平衡点了,<br>就是<strong>razor端的数据如何获取</strong>的问题.</p>
+<a id="more"></a>
+<hr>
+<p>针对以上的问题, 我们考虑了2个方案</p>
+<ul>
+<li>使用 Quartz 定时从 razor 采集数据到 mysql</li>
+<li>直接在web端建立远程数据源</li>
+</ul>
+<hr>
+<p>我们的需求是在界面上定时刷新razor端监测的主机状态(包括Node, Tag, Policy, Repo),<br>通过调用razor的restful api来完成.<br><strong>完成这个想法是个很简单的任务</strong><br><strong>为此我对Spring-Quartz的支持做了一个封装, 并使用Apache Http Client 4.3.6 进行了单例的池化管理</strong><br><strong>我想说的是, 最后这个想法放弃了, 因为api返回的非关系数据在mysql上实现太难搞了</strong><br><strong>评估之后发现写起来的代码几乎都是在解析json上</strong></p>
+<hr>
+<p>那么就直接建立远端数据源<br><strong>由于mysql本身已经使用hibernate jpa完成了一个数据源的绑定</strong></p>
+<p><strong>对远端数据源的话</strong></p>
+<ul>
+<li>重复一个代码</li>
+<li>使用其他的方式进行CRDU操作</li>
+</ul>
+<p>刚好不满足一直使用HibernateTemplate的操作, 最近看上了Spring-Data-Jpa的知识, 捣鼓了下, 总算搞定了<br>直接上Spring-Data-Jpa的配置上, 虽然不是本文的主题^_~, 后续补上</p>
+<h4 id="Spring-Data-Jpa_u7684_u914D_u7F6E"><a href="#Spring-Data-Jpa_u7684_u914D_u7F6E" class="headerlink" title="Spring-Data-Jpa的配置"></a>Spring-Data-Jpa的配置</h4><p><strong>用到了 maven 和 properties文件</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">beans</span> <span class="attribute">xmlns</span>=<span class="value">"http://www.springframework.org/schema/beans"</span></span><br><span class="line">    <span class="attribute">xmlns:xsi</span>=<span class="value">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">    <span class="attribute">xmlns:aop</span>=<span class="value">"http://www.springframework.org/schema/aop"</span></span><br><span class="line">    <span class="attribute">xmlns:c</span>=<span class="value">"http://www.springframework.org/schema/c"</span></span><br><span class="line">    <span class="attribute">xmlns:context</span>=<span class="value">"http://www.springframework.org/schema/context"</span></span><br><span class="line">    <span class="attribute">xmlns:jee</span>=<span class="value">"http://www.springframework.org/schema/jee"</span></span><br><span class="line">    <span class="attribute">xmlns:lang</span>=<span class="value">"http://www.springframework.org/schema/lang"</span></span><br><span class="line">    <span class="attribute">xmlns:task</span>=<span class="value">"http://www.springframework.org/schema/task"</span></span><br><span class="line">    <span class="attribute">xmlns:util</span>=<span class="value">"http://www.springframework.org/schema/util"</span></span><br><span class="line">    <span class="attribute">xmlns:mongo</span>=<span class="value">"http://www.springframework.org/schema/data/mongo"</span></span><br><span class="line">    <span class="attribute">xmlns:cache</span>=<span class="value">"http://www.springframework.org/schema/cache"</span></span><br><span class="line">    <span class="attribute">xmlns:jdbc</span>=<span class="value">"http://www.springframework.org/schema/jdbc"</span></span><br><span class="line">    <span class="attribute">xmlns:jpa</span>=<span class="value">"http://www.springframework.org/schema/data/jpa"</span></span><br><span class="line">    <span class="attribute">xmlns:mvc</span>=<span class="value">"http://www.springframework.org/schema/mvc"</span></span><br><span class="line">    <span class="attribute">xmlns:p</span>=<span class="value">"http://www.springframework.org/schema/p"</span></span><br><span class="line">    <span class="attribute">xmlns:repository</span>=<span class="value">"http://www.springframework.org/schema/data/repository"</span></span><br><span class="line">    <span class="attribute">xmlns:tx</span>=<span class="value">"http://www.springframework.org/schema/tx"</span></span><br><span class="line">    <span class="attribute">xsi:schemaLocation</span>=<span class="value">"http://www.springframework.org/schema/jee</span><br><span class="line">    http://www.springframework.org/schema/jee/spring-jee-3.0.xsd</span><br><span class="line">        http://www.springframework.org/schema/lang</span><br><span class="line">        http://www.springframework.org/schema/lang/spring-lang-3.0.xsd</span><br><span class="line">        http://www.springframework.org/schema/data/mongo</span><br><span class="line">        http://www.springframework.org/schema/data/mongo/spring-mongo-1.5.xsd</span><br><span class="line">        http://www.springframework.org/schema/jdbc</span><br><span class="line">        http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd</span><br><span class="line">        http://www.springframework.org/schema/data/repository</span><br><span class="line">        http://www.springframework.org/schema/data/repository/spring-repository-1.7.xsd</span><br><span class="line">        http://www.springframework.org/schema/mvc</span><br><span class="line">        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd</span><br><span class="line">        http://www.springframework.org/schema/task</span><br><span class="line">        http://www.springframework.org/schema/task/spring-task-3.0.xsd</span><br><span class="line">        http://www.springframework.org/schema/beans</span><br><span class="line">        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</span><br><span class="line">        http://www.springframework.org/schema/data/jpa</span><br><span class="line">        http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd</span><br><span class="line">        http://www.springframework.org/schema/cache</span><br><span class="line">        http://www.springframework.org/schema/cache/spring-cache-3.2.xsd</span><br><span class="line">        http://www.springframework.org/schema/tx</span><br><span class="line">        http://www.springframework.org/schema/tx/spring-tx-3.2.xsd</span><br><span class="line">        http://www.springframework.org/schema/aop</span><br><span class="line">        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd</span><br><span class="line">        http://www.springframework.org/schema/util</span><br><span class="line">        http://www.springframework.org/schema/util/spring-util-3.0.xsd</span><br><span class="line">        http://www.springframework.org/schema/context</span><br><span class="line">        http://www.springframework.org/schema/context/spring-context-3.0.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">context:property-placeholder</span> <span class="attribute">location</span>=<span class="value">"classpath:jpa-resources.properties"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- razor数据源 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"razorDataSource"</span> <span class="attribute">class</span>=<span class="value">"com.mchange.v2.c3p0.ComboPooledDataSource"</span></span><br><span class="line">        <span class="attribute">destroy-method</span>=<span class="value">"close"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"driverClass"</span> <span class="attribute">value</span>=<span class="value">"$&#123;jpa.connection.driver&#125;"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"jdbcUrl"</span> <span class="attribute">value</span>=<span class="value">"$&#123;jpa.connection.url&#125;"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"user"</span> <span class="attribute">value</span>=<span class="value">"$&#123;jpa.connection.username&#125;"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"password"</span> <span class="attribute">value</span>=<span class="value">"$&#123;jpa.connection.password&#125;"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"minPoolSize"</span> <span class="attribute">value</span>=<span class="value">"10"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"maxPoolSize"</span> <span class="attribute">value</span>=<span class="value">"120"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"maxIdleTime"</span> <span class="attribute">value</span>=<span class="value">"1800"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"acquireIncrement"</span> <span class="attribute">value</span>=<span class="value">"10"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"maxStatements"</span> <span class="attribute">value</span>=<span class="value">"2"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"initialPoolSize"</span> <span class="attribute">value</span>=<span class="value">"2"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"idleConnectionTestPeriod"</span> <span class="attribute">value</span>=<span class="value">"1800"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"acquireRetryAttempts"</span> <span class="attribute">value</span>=<span class="value">"1"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"breakAfterAcquireFailure"</span> <span class="attribute">value</span>=<span class="value">"true"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"testConnectionOnCheckout"</span> <span class="attribute">value</span>=<span class="value">"false"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- jpa Entity Factory 配置 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"entityManagerFactory"</span></span><br><span class="line">        <span class="attribute">class</span>=<span class="value">"org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"dataSource"</span> <span class="attribute">ref</span>=<span class="value">"razorDataSource"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"packagesToScan"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">list</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">value</span>&gt;</span>com.ffcs.itm.oops.web.autopacker.entity<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">list</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"persistenceUnitName"</span> <span class="attribute">value</span>=<span class="value">"$&#123;jpa.persistenceUnitName&#125;"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"persistenceProvider"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">bean</span> <span class="attribute">class</span>=<span class="value">"org.hibernate.ejb.HibernatePersistence"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"jpaVendorAdapter"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">bean</span> <span class="attribute">class</span>=<span class="value">"org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"generateDdl"</span> <span class="attribute">value</span>=<span class="value">"$&#123;jpa.generateDdl&#125;"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"database"</span> <span class="attribute">value</span>=<span class="value">"$&#123;jpa.database&#125;"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"databasePlatform"</span> <span class="attribute">value</span>=<span class="value">"$&#123;jpa.databasePlatform&#125;"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"showSql"</span> <span class="attribute">value</span>=<span class="value">"$&#123;jpa.showSql&#125;"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"jpaDialect"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">bean</span> <span class="attribute">class</span>=<span class="value">"org.springframework.orm.jpa.vendor.HibernateJpaDialect"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"jpaPropertyMap"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">map</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 使用自定义的validator进行jsr303验证 --&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">entry</span> <span class="attribute">key</span>=<span class="value">"javax.persistence.validation.factory"</span> <span class="attribute">value-ref</span>=<span class="value">"validator"</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 只扫描class文件，不扫描hbm，默认两个都搜索 --&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">entry</span> <span class="attribute">key</span>=<span class="value">"hibernate.archive.autodetection"</span> <span class="attribute">value</span>=<span class="value">"class"</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 不检查@NamedQuery --&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">entry</span> <span class="attribute">key</span>=<span class="value">"hibernate.query.startup_check"</span> <span class="attribute">value</span>=<span class="value">"false"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">entry</span> <span class="attribute">key</span>=<span class="value">"hibernate.query.substitutions"</span></span><br><span class="line">                    <span class="attribute">value</span>=<span class="value">"$&#123;hibernate.query.substitutions&#125;"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">entry</span> <span class="attribute">key</span>=<span class="value">"hibernate.default_batch_fetch_size"</span></span><br><span class="line">                    <span class="attribute">value</span>=<span class="value">"$&#123;hibernate.default_batch_fetch_size&#125;"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">entry</span> <span class="attribute">key</span>=<span class="value">"hibernate.max_fetch_depth"</span></span><br><span class="line">                    <span class="attribute">value</span>=<span class="value">"$&#123;hibernate.max_fetch_depth&#125;"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">entry</span> <span class="attribute">key</span>=<span class="value">"hibernate.generate_statistics"</span></span><br><span class="line">                    <span class="attribute">value</span>=<span class="value">"$&#123;hibernate.generate_statistics&#125;"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">entry</span> <span class="attribute">key</span>=<span class="value">"hibernate.bytecode.use_reflection_optimizer"</span></span><br><span class="line">                    <span class="attribute">value</span>=<span class="value">"$&#123;hibernate.bytecode.use_reflection_optimizer&#125;"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">entry</span> <span class="attribute">key</span>=<span class="value">"hibernate.cache.use_second_level_cache"</span></span><br><span class="line">                    <span class="attribute">value</span>=<span class="value">"$&#123;hibernate.cache.use_second_level_cache&#125;"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">entry</span> <span class="attribute">key</span>=<span class="value">"hibernate.cache.use_query_cache"</span></span><br><span class="line">                    <span class="attribute">value</span>=<span class="value">"$&#123;hibernate.cache.use_query_cache&#125;"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">entry</span> <span class="attribute">key</span>=<span class="value">"hibernate.cache.region.factory_class"</span></span><br><span class="line">                    <span class="attribute">value</span>=<span class="value">"$&#123;hibernate.cache.region.factory_class&#125;"</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- &lt;entry key="net.sf.ehcache.configurationResourceName" value="$&#123;net.sf.ehcache.configurationResourceName&#125;"/&gt; --&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">entry</span> <span class="attribute">key</span>=<span class="value">"hibernate.cache.use_structured_entries"</span></span><br><span class="line">                    <span class="attribute">value</span>=<span class="value">"$&#123;hibernate.cache.use_structured_entries&#125;"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">map</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--事务管理器配置--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"transactionManager"</span></span><br><span class="line">        <span class="attribute">class</span>=<span class="value">"org.springframework.orm.jpa.JpaTransactionManager"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"entityManagerFactory"</span> <span class="attribute">ref</span>=<span class="value">"entityManagerFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">tx:annotation-driven</span> <span class="attribute">transaction-manager</span>=<span class="value">"transactionManager"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">tx:advice</span> <span class="attribute">id</span>=<span class="value">"transactionAdvice"</span> <span class="attribute">transaction-manager</span>=<span class="value">"transactionManager"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">tx:attributes</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--hibernate4必须配置为开启事务 否则 getCurrentSession()获取不到--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">tx:method</span> <span class="attribute">name</span>=<span class="value">"get*"</span> <span class="attribute">propagation</span>=<span class="value">"REQUIRED"</span> <span class="attribute">read-only</span>=<span class="value">"true"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">tx:method</span> <span class="attribute">name</span>=<span class="value">"count*"</span> <span class="attribute">propagation</span>=<span class="value">"REQUIRED"</span> <span class="attribute">read-only</span>=<span class="value">"true"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">tx:method</span> <span class="attribute">name</span>=<span class="value">"find*"</span> <span class="attribute">propagation</span>=<span class="value">"REQUIRED"</span> <span class="attribute">read-only</span>=<span class="value">"true"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">tx:method</span> <span class="attribute">name</span>=<span class="value">"list*"</span> <span class="attribute">propagation</span>=<span class="value">"REQUIRED"</span> <span class="attribute">read-only</span>=<span class="value">"true"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">tx:method</span> <span class="attribute">name</span>=<span class="value">"*"</span> <span class="attribute">propagation</span>=<span class="value">"REQUIRED"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">tx:attributes</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">tx:advice</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">aop:config</span> <span class="attribute">expose-proxy</span>=<span class="value">"true"</span> <span class="attribute">proxy-target-class</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 只对业务逻辑层实施事务 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">aop:pointcut</span> <span class="attribute">id</span>=<span class="value">"transactionPointcut"</span></span><br><span class="line">            <span class="attribute">expression</span>=<span class="value">"execution(* com.ffcs.itm.oops..serviced..*+.*(..))"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">aop:advisor</span> <span class="attribute">id</span>=<span class="value">"transactionAdvisor"</span></span><br><span class="line">            <span class="attribute">advice-ref</span>=<span class="value">"transactionAdvice"</span> <span class="attribute">pointcut-ref</span>=<span class="value">"transactionPointcut"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">aop:config</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 扫描 spring data jpa repository --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">jpa:repositories</span></span><br><span class="line">        <span class="attribute">base-package</span>=<span class="value">"com.ffcs.itm.oops.**.repository"</span></span><br><span class="line">        <span class="attribute">repository-impl-postfix</span>=<span class="value">"Impl"</span></span><br><span class="line">        <span class="attribute">entity-manager-factory-ref</span>=<span class="value">"entityManagerFactory"</span></span><br><span class="line">        <span class="attribute">factory-class</span>=<span class="value">"com.ffcs.itm.oops.common.repository.support</span><br><span class="line">                            .SimpleBaseRepositoryFactoryBean"</span></span><br><span class="line">        <span class="attribute">transaction-manager-ref</span>=<span class="value">"transactionManager"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">jpa:repositories</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--设置RepositoryUtil辅助类所需的entityManagerFactory--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">bean</span> <span class="attribute">class</span>=<span class="value">"org.springframework.beans.factory.config.MethodInvokingFactoryBean"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"staticMethod"</span></span><br><span class="line">                  <span class="attribute">value</span>=<span class="value">"com.ffcs.itm.oops.common.repository.support</span><br><span class="line">                    .RepositoryUtil.setEntityManagerFactory"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"arguments"</span> <span class="attribute">ref</span>=<span class="value">"entityManagerFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>配置成功之后, 2个数据源终于不冲突可以好好使用了</p>
+<ul>
+<li>之前以为Spring-Data-Jpa只支持Hibernate4, 项目使用3, 换得一阵惨痛</li>
+</ul>
+<h4 id="u672C_u6587_u91CD_u70B9"><a href="#u672C_u6587_u91CD_u70B9" class="headerlink" title="本文重点"></a>本文重点</h4><p>搭建成功之后, 测试了一下数据, 结果先后来个以下2个问题</p>
+<ul>
+<li>OpenSessionInView的问题, No Session or Session closed;</li>
+<li>JSONObject的转换问题了, 嵌套太多, 死循环了(要么DTO, 要么注册过滤器, 说多了都是泪)</li>
+</ul>
+<h4 id="OpenSessionInView_u914D_u7F6E"><a href="#OpenSessionInView_u914D_u7F6E" class="headerlink" title="OpenSessionInView配置"></a>OpenSessionInView配置</h4><p><strong>一下子慌了, 本来web.xml</strong>是有配置下列代码的, 没想到没通用<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Hibernate 过滤器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">filter-name</span>&gt;</span>openSessionInView<span class="tag">&lt;/<span class="title">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">filter-class</span>&gt;</span></span><br><span class="line">        org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</span><br><span class="line">    <span class="tag">&lt;/<span class="title">filter-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">param-name</span>&gt;</span>flushMode<span class="tag">&lt;/<span class="title">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">param-value</span>&gt;</span>AUTO <span class="tag">&lt;/<span class="title">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">filter-name</span>&gt;</span>openSessionInView<span class="tag">&lt;/<span class="title">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="title">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>所幸的是, Spring-Data-Jpa也有一个这样的配置, 还好没出大事情<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Spring Data Jpa 防止Session失效设置  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">filter-name</span>&gt;</span>openEntityManagerInViewFilter<span class="tag">&lt;/<span class="title">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">filter-class</span>&gt;</span></span><br><span class="line">        org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</span><br><span class="line">    <span class="tag">&lt;/<span class="title">filter-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">param-name</span>&gt;</span>entityManagerFactoryBeanName<span class="tag">&lt;/<span class="title">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">param-value</span>&gt;</span>entityManagerFactory<span class="tag">&lt;/<span class="title">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">filter-name</span>&gt;</span>openEntityManagerInViewFilter<span class="tag">&lt;/<span class="title">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="title">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/12/09/Fiddler/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          基于Fiddler的前端调试技术
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/12/06/Spring-Security/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring Security 安全</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Spring-Data-Jpa-Session" data-title="Spring-Data-Jpa-Open-Session-In-View" data-url="http://yoursite.com/2014/12/07/Spring-Data-Jpa-Session/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"KingDomPan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 KingDomPan
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

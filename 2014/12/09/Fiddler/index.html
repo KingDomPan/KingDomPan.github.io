@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>基于Fiddler的前端调试技术 | KingDomPan&#39;s Secret Garden</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文是我在浙江现场出差的时候, E周E文给现场的兄弟们讲解开发技术草拟的讲义, 文后奉上了录制视频, 主要讲解JAVA WEB开发的知识, 并重点通过Fiddler这个前台调试神器现场演示了作用.
+视频地址 怒点我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Fiddler的前端调试技术">
+<meta property="og:url" content="http://yoursite.com/2014/12/09/Fiddler/index.html">
+<meta property="og:site_name" content="KingDomPan's Secret Garden">
+<meta property="og:description" content="本文是我在浙江现场出差的时候, E周E文给现场的兄弟们讲解开发技术草拟的讲义, 文后奉上了录制视频, 主要讲解JAVA WEB开发的知识, 并重点通过Fiddler这个前台调试神器现场演示了作用.
+视频地址 怒点我">
+<meta property="og:image" content="http://yoursite.com/images/Fiddler/1.png">
+<meta property="og:updated_time" content="2016-01-14T03:42:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于Fiddler的前端调试技术">
+<meta name="twitter:description" content="本文是我在浙江现场出差的时候, E周E文给现场的兄弟们讲解开发技术草拟的讲义, 文后奉上了录制视频, 主要讲解JAVA WEB开发的知识, 并重点通过Fiddler这个前台调试神器现场演示了作用.
+视频地址 怒点我">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">KingDomPan</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">左手前端, 右手后端, 我, 全栈了!</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/KingDomPan" title="github">github</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Data/" style="font-size: 20px;">Data</a> <a href="/tags/Fiddler/" style="font-size: 10px;">Fiddler</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/JPA/" style="font-size: 10px;">JPA</a> <a href="/tags/JRebel/" style="font-size: 10px;">JRebel</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Jpa/" style="font-size: 15px;">Jpa</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Seesion/" style="font-size: 10px;">Seesion</a> <a href="/tags/Spring/" style="font-size: 20px;">Spring</a> <a href="/tags/Spring-Security-安全验证/" style="font-size: 10px;">Spring Security 安全验证</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">左手前端, 右手后端, 我, 全栈了!</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">KingDomPan</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="null" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">KingDomPan</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">左手前端, 右手后端, 我, 全栈了!</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/KingDomPan" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-Fiddler" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/12/09/Fiddler/" class="article-date">
+  	<time datetime="2014-12-09T11:04:06.000Z" itemprop="datePublished">2014-12-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      基于Fiddler的前端调试技术
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fiddler/">Fiddler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/HTTP/">HTTP</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文是我在浙江现场出差的时候, E周E文给现场的兄弟们讲解开发技术<br>草拟的讲义, 文后奉上了录制视频, 主要讲解JAVA WEB开发的知识, 并<br>重点通过Fiddler这个前台调试神器现场演示了作用.</p>
+<p><strong>视频地址</strong> <a href="http://pan.baidu.com/s/1gdkXFtp" target="_blank" rel="external">怒点我</a></p>
+<a id="more"></a>
+<h3 id="Best_Practice_2_ME_4_WEB_DEV"><a href="#Best_Practice_2_ME_4_WEB_DEV" class="headerlink" title="Best Practice 2 ME 4 WEB DEV"></a>Best Practice 2 ME 4 WEB DEV</h3><h4 id="JAVA_WEB"><a href="#JAVA_WEB" class="headerlink" title="JAVA WEB"></a>JAVA WEB</h4><p><strong> 主要讲述了javaweb的开发知识, 并且涉猎了其他的web开发 </strong></p>
+<ul>
+<li>WEB:ASP. NET, JSP, PHP, RUBY, PYTHON</li>
+<li>J2EE: <a href="http://www.importnew.com/10716.html" target="_blank" rel="external">J2EE</a></li>
+<li>WEB前端涉及技术<ul>
+<li>HTML (规范网站的结构和内容)</li>
+<li>CSS(规范风格)</li>
+<li>JS(操作DOM)(框架:extjs,jquery等等),Node.js服务端的js框架,高性能NODEJS</li>
+</ul>
+</li>
+<li>JAVA:struts1(2), hibernate,mybatis,spring</li>
+</ul>
+<h4 id="u524D_u7AEF_u5DE5_u7A0B_u5E08"><a href="#u524D_u7AEF_u5DE5_u7A0B_u5E08" class="headerlink" title="前端工程师"></a>前端工程师</h4><p><strong>忘了当时讲什么了, 见连接<a href="http://www.admin10000.com/document/4216.html#rd" target="_blank" rel="external">点我点我</a></strong></p>
+<ul>
+<li>程序员修炼三部曲<ul>
+<li>版本控制:CSV SVN(集中) GIT(分布式)</li>
+<li>单元测试:DTD(Junit, TestNG)</li>
+<li>项目构建:ANT MAVEN(jar)</li>
+</ul>
+</li>
+</ul>
+<h4 id="u642D_u5EFA_u4E00_u4E2Aweb_u9879_u76EE"><a href="#u642D_u5EFA_u4E00_u4E2Aweb_u9879_u76EE" class="headerlink" title="搭建一个web项目"></a>搭建一个web项目</h4><p><strong> 主要是讲解路由映射的概念, 方便后面实例讲解</strong></p>
+<ul>
+<li>静态资源:没有urlrewrite的话,直接相对项目路径来查找</li>
+<li>Servlet:路径映射在web.xml找(注解配置和Restful风格的配置令论)</li>
+</ul>
+<h4 id="u524D_u53F0_u9759_u6001_u6587_u4EF6_u8C03_u8BD5_28HTML_2CCSS_29_2C_u811A_u672C_u8C03_u8BD5_28JS_29"><a href="#u524D_u53F0_u9759_u6001_u6587_u4EF6_u8C03_u8BD5_28HTML_2CCSS_29_2C_u811A_u672C_u8C03_u8BD5_28JS_29" class="headerlink" title="前台静态文件调试(HTML,CSS),脚本调试(JS)"></a>前台静态文件调试(HTML,CSS),脚本调试(JS)</h4><ul>
+<li>HTTP调试</li>
+<li>JS调试</li>
+<li>调试利器<ul>
+<li>IE开发利器-IE10中的F12开发者工具<a href="http://wlzcool.blog.51cto.com/5341447/1201305" target="_blank" rel="external">IE10-F12使用详解</a></li>
+<li>FIDDLER2<a href="http://www.telerik.com/fiddler" target="_blank" rel="external">基本介绍</a> <strong>注意.net版本问题</strong></li>
+<li>FIDDLER2基本介绍2<a href="http://www.cnblogs.com/TankXiao/archive/2012/02/06/2337728.html" target="_blank" rel="external">基本介绍2</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="Fiddler2_u5B9E_u6218"><a href="#Fiddler2_u5B9E_u6218" class="headerlink" title="Fiddler2实战"></a>Fiddler2实战</h4><ul>
+<li>代码定位(MyEclipse[高级]查找)<ul>
+<li>自定义查询表格(数据请求及其格式)</li>
+<li>未处理事务(/workshop/queryTemplate/main.html?id=511)</li>
+<li>查找传阅人员(/workshop/form/index.jsp?fullscreen=yes&amp;flowId=570002005850&amp;flowMod=11143&amp;system_code=G)</li>
+<li>定位Ext.Window对象(/workshop/jdbcGather/jdbcGather.html)</li>
+<li>待办数不明确<img src="/images/Fiddler/1.png" alt=""></li>
+<li>需求流程的需求类型数据(/workshop/form/index.jsp?flowMod=11143)</li>
+</ul>
+</li>
+<li>拦截请求<ul>
+<li>修改请求数据,删除数据库数据(需求黑名单)(/workshop/form/zjFormFile/zj_require_black.html)</li>
+</ul>
+</li>
+<li>拦截响应<ul>
+<li>高额签到表,用户状态信息展(/workshop/form/zjFormFile/zj_sign.jsp?imsi=460030135885703&amp;rowid=AAFu/qAHxAAABHzAAA)</li>
+</ul>
+</li>
+<li>AutoResponder<ul>
+<li>百度首页图片</li>
+<li>IE:tree的多选解决思路</li>
+</ul>
+</li>
+<li>构建请求<ul>
+<li>模拟登录ITNM系统,删除流程附件</li>
+</ul>
+</li>
+</ul>
+<h4 id="u5176_u4ED6"><a href="#u5176_u4ED6" class="headerlink" title="其他"></a>其他</h4><p><strong>主要介绍了sublime和python</strong></p>
+<ul>
+<li>Sublime Text<ul>
+<li>Sublime Text<a href="http://www.sublimetext.com/" target="_blank" rel="external">Sublime Text</a></li>
+<li>PACKAGE CONTROL<a href="https://sublime.wbond.net/installation#" target="_blank" rel="external">package control</a></li>
+</ul>
+</li>
+<li>Python[运维, 游戏, web, 数据分析]<ul>
+<li>上传集群服务器</li>
+<li>补丁文件比对工具</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/12/11/Spring-Data-Jpa-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Spring-Data-Jpa-基础概括
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/12/07/Spring-Data-Jpa-Session/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring-Data-Jpa-Open-Session-In-View</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Fiddler" data-title="基于Fiddler的前端调试技术" data-url="http://yoursite.com/2014/12/09/Fiddler/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"KingDomPan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 KingDomPan
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
