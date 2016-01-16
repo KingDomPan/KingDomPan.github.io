@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Promise及Fetch源码解析 | KingDomPan&#39;s Secret Garden</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="后端的很多语言处理http请求都用上了Promise这种模型, 比如finatra. Promise代表的是一个承诺值或者是一个会抛出的异常对象, 后端可以进行异步处理. 同时, 那万恶的nodejs风格的callback也渐渐被Promise这个模型所替代了. Promise类似状态机, 而且只有三个状态, 并只能进行2种转换
+
+浏览器默认的Promise模型当前已经有很多基于Promise的j">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Promise及Fetch源码解析">
+<meta property="og:url" content="http://yoursite.com/2015/11/12/PromiseFetch/index.html">
+<meta property="og:site_name" content="KingDomPan's Secret Garden">
+<meta property="og:description" content="后端的很多语言处理http请求都用上了Promise这种模型, 比如finatra. Promise代表的是一个承诺值或者是一个会抛出的异常对象, 后端可以进行异步处理. 同时, 那万恶的nodejs风格的callback也渐渐被Promise这个模型所替代了. Promise类似状态机, 而且只有三个状态, 并只能进行2种转换
+
+浏览器默认的Promise模型当前已经有很多基于Promise的j">
+<meta property="og:image" content="http://yoursite.com/images/ReactJs/PromiseFetch.png">
+<meta property="og:image" content="http://yoursite.com/images/ReactJs/PromiseFetch.png">
+<meta property="og:updated_time" content="2016-01-14T13:03:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Promise及Fetch源码解析">
+<meta name="twitter:description" content="后端的很多语言处理http请求都用上了Promise这种模型, 比如finatra. Promise代表的是一个承诺值或者是一个会抛出的异常对象, 后端可以进行异步处理. 同时, 那万恶的nodejs风格的callback也渐渐被Promise这个模型所替代了. Promise类似状态机, 而且只有三个状态, 并只能进行2种转换
+
+浏览器默认的Promise模型当前已经有很多基于Promise的j">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">KingDomPan</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">左手前端, 右手后端, 我, 全栈了!</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">真的我</a></li>
+				        
+							<li><a href="/read">读书</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/KingDomPan" title="github">github</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Data/" style="font-size: 20px;">Data</a> <a href="/tags/Fetch/" style="font-size: 10px;">Fetch</a> <a href="/tags/Fiddler/" style="font-size: 10px;">Fiddler</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/JRebel/" style="font-size: 10px;">JRebel</a> <a href="/tags/JS/" style="font-size: 15px;">JS</a> <a href="/tags/Jpa/" style="font-size: 20px;">Jpa</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/ReactJs/" style="font-size: 10px;">ReactJs</a> <a href="/tags/Seesion/" style="font-size: 10px;">Seesion</a> <a href="/tags/Spring/" style="font-size: 20px;">Spring</a> <a href="/tags/Spring-Security-安全验证/" style="font-size: 10px;">Spring Security 安全验证</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">左手前端, 右手后端, 我, 全栈了!</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">KingDomPan</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="null" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">KingDomPan</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">左手前端, 右手后端, 我, 全栈了!</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">真的我</a></li>
+		        
+					<li><a href="/read">读书</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/KingDomPan" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-PromiseFetch" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/12/PromiseFetch/" class="article-date">
+  	<time datetime="2015-11-12T12:50:25.000Z" itemprop="datePublished">2015-11-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Promise及Fetch源码解析
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fetch/">Fetch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Promise/">Promise</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>后端的很多语言处理http请求都用上了Promise这种模型, 比如finatra. Promise代表的是一个承诺值或者是一个会抛出的异常对象, 后端可以进行异步处理. 同时, 那万恶的nodejs风格的callback也渐渐被Promise这个模型所替代了. <strong>Promise类似状态机, 而且只有三个状态, 并只能进行2种转换</strong></p>
+<p><img src="/images/ReactJs/PromiseFetch.png" alt="PromiseFetch"></p>
+<h4 id="u6D4F_u89C8_u5668_u9ED8_u8BA4_u7684Promise_u6A21_u578B"><a href="#u6D4F_u89C8_u5668_u9ED8_u8BA4_u7684Promise_u6A21_u578B" class="headerlink" title="浏览器默认的Promise模型"></a>浏览器默认的Promise模型</h4><p>当前已经有很多基于Promise的js库, 比如q, bluebird等等, 都提供了比较简洁的api来使用Promise.下面的代码例子是浏览器的默认行为</p>
+<a id="more"></a>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Run your code here</span></span><br><span class="line">  <span class="keyword">var</span> k = <span class="literal">true</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"My Name is KingDomPan"</span>);</span><br><span class="line">  <span class="comment">// Change the State</span></span><br><span class="line">  <span class="keyword">if</span> (k === <span class="literal">true</span>) &#123;</span><br><span class="line">    resolve(<span class="string">"KingDomPan"</span>); <span class="comment">// 从pending到fulfilled的状态切换</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    reject(<span class="string">"Also KingDomPan"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">p.then(<span class="function"><span class="keyword">function</span>(<span class="params">input</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"The Return From Resolve Callback "</span> + input); <span class="comment">// 触发回调</span></span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">input</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"The Return From Reject Callback "</span> + input);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><img src="/images/ReactJs/PromiseFetch.png" alt="Promise"></p>
+<p><strong>当然了then对象之后的返回还是一个promise, 因此可以持续then的调用</strong></p>
+<h4 id="u4E00_u4E2APromise_u7684_u7B80_u77ED_u5B9E_u73B0"><a href="#u4E00_u4E2APromise_u7684_u7B80_u77ED_u5B9E_u73B0" class="headerlink" title="一个Promise的简短实现"></a>一个Promise的简短实现</h4><p><strong>这个例子证实了Promise是可以纵向处理异步的, 而不是万恶的callback横向处理</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">Promise</span> = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.thens = [];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.prototype = &#123;</span><br><span class="line">    resolve: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> t = <span class="keyword">this</span>.thens.shift(), n;</span><br><span class="line">        <span class="comment">// 通过将当前的thens挂靠在子Promise的thens下实现任务的thenable</span></span><br><span class="line">        t &amp;&amp; (n = t.apply(<span class="literal">null</span>, <span class="built_in">arguments</span>), n <span class="keyword">instanceof</span> <span class="built_in">Promise</span> &amp;&amp; (n.thens = thens));</span><br><span class="line">    &#125;,</span><br><span class="line">    then: <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.thens.push(n)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="fetch_u6807_u51C6_u6E90_u4EE3_u7801_u89E3_u6790"><a href="#fetch_u6807_u51C6_u6E90_u4EE3_u7801_u89E3_u6790" class="headerlink" title="fetch标准源代码解析"></a>fetch标准源代码解析</h4><p>当前IE9, Firefox, Chrome基本已经内置Fetch的全局方法, 下面的代码来源于<a href="https://github.com/github/fetch/blob/master/fetch.js" target="_blank" rel="external">Fetch In Github</a></p>
+<ul>
+<li>function normalizeName(name) 校验http头字段, 返回小写</li>
+<li>function normalizeValue(value) 字符串化value</li>
+<li>function Headers(headers) 创建http头, 参数可以是Header或者js对象, 内部数据结构是一个map, value对应一个数组</li>
+<li>Headers.prototype<ul>
+<li>append 追加http头</li>
+<li>delete 删除http头</li>
+<li>get 获得某个http头的第一个值</li>
+<li>getAll 获得某个http头的全部值, 返回一个数组</li>
+<li>has 检测是否有某个http头</li>
+<li>set 设置某个http头的值, 会覆盖map中对应http头的全部值</li>
+<li>forEach(callback, context) 遍历headers, 首先遍历map中的name, 再遍历取出来的values, 传递到callback中并绑定context(call方法的使用)</li>
+</ul>
+</li>
+<li>function consumed(body) 设置http体是否被使用, 如果超过一次使用的话就会触发promise的catch进行异常处理</li>
+<li>function fileReaderReady(reader) 返回promise, 当输入流准备就绪, 调用resolve方法进行数据的处理, 异常则进行异常处理. <strong>reader是HTML5 FileReader之类的实现</strong></li>
+<li>function readBlobAsArrayBuffer(blob) 调用fileReaderReady对blob进行处理而已</li>
+<li>function readBlobAsText(blob) 调用fileReaderReady对blob进行处理而已</li>
+<li>support对象, 该对象检测是否具有HTML5的属性, 比如support.blob support.formData support.arrayBuffer</li>
+<li><p>function Body()</p>
+<ul>
+<li>很明显Body的构造函数</li>
+<li>this.bodyUsed = false;</li>
+<li>this._initBody = function(body)<ul>
+<li>this._bodyInit 保存原始body数据</li>
+<li>判断body类型, 创建this.__bodyXXXX保存body</li>
+</ul>
+</li>
+<li>this.blob()返回promise处理body数据, 数据字段对应了this.__initBody里面创建的</li>
+<li>this.arrayBuffer() 同上</li>
+<li>this.text() 同上</li>
+<li>this.formData() 调用decode解码而已, 返回Promise</li>
+<li>this.json() 调用JSON.parse()返回json对象而已, 返回Promise</li>
+</ul>
+</li>
+<li><p>function normalizeMethod(method) 返回规定的HTTP方法字符串而已</p>
+</li>
+<li>function Request(input, options) 创建请求对象 <strong>这个Request会继承Body</strong><ul>
+<li>input 包含url, cookie, method, headers 等等的信息 (<strong>如果继承Body的话</strong>), 否则就是url(<strong>没继承Body</strong>)</li>
+<li>options 包含body的可选信息</li>
+<li>一系列设值操作…….</li>
+</ul>
+</li>
+<li>Request.prototype.clone<ul>
+<li>return new Request(this) 简单明了</li>
+</ul>
+</li>
+<li>function decode(body) queryString的解码, 返回HTLM5的FormData()对象, 参数是字符串, 即bodyText</li>
+<li>function headers(xhr) 从xhr对象获得所有的响应头, 创建Headers并返回</li>
+<li>Body.call(Request.prototype) 果然Request是直接继承Body的</li>
+<li>function Response(bodyInit, options) <strong>Response对象的创建</strong><ul>
+<li>options 返回回来的响应头信息</li>
+</ul>
+</li>
+<li>Body.call(Response.prototype) 果然Response也是直接继承Body的</li>
+<li>Response.prototype.clone() 不废话了</li>
+<li>Response.error = function() 直接在构造函数上创建一error方法返回一个错误的response实例对象</li>
+<li>redirectStatuses 重定向的http状态码</li>
+<li>Response.redirect = function(url, status) {} 返回一个重定向的response</li>
+<li>给window设置全局对象, 或者nodejs中的global<ul>
+<li>self.Headers = Headers;</li>
+<li>self.Request = Request;</li>
+<li>self.Response = Response;</li>
+</ul>
+</li>
+<li>self.fetch(input, init) 定义伟大的fetch方法<ul>
+<li>返回一个promise<ul>
+<li>初始化请求对象Request</li>
+<li>创建xhr对象<ul>
+<li>onload 验证是不是网络异常, 返回一个Response给Promise的then进行处理</li>
+<li>onerror 网络异常了才会触发这个</li>
+</ul>
+</li>
+<li>内部函数responseURL, 主要是为了CORS的安全考虑的</li>
+<li>将Request的头信息弄到xhr对象里, 发请求</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>self.fetch.polyfill = true 最后这个了这个货的一个属性, 我也不知道</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/12/02/ReactJsLifecycle/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          ReactJs生命周期
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/12/28/js/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">悟透Javascript</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="PromiseFetch" data-title="Promise及Fetch源码解析" data-url="http://yoursite.com/2015/11/12/PromiseFetch/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"KingDomPan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 KingDomPan
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
