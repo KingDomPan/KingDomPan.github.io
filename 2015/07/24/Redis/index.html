@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Redis | KingDomPan&#39;s Secret Garden</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是Redis
+KV Store 用来补充关系型数据库
+可以持久化的cache, 可以保存一些频繁访问的数据
+高性能的内存数据库
+数据结构服务器, 可以保存复杂的数据类型
+缺点: 数据库容量受到物理内存的限制, 不能用作海量数据的高性能读写, 并且没有原生的可扩展机制, 要依赖客户端实现分布式读写, 因此适合场景主要局限在较小量的高性能操作和运算上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis">
+<meta property="og:url" content="http://yoursite.com/2015/07/24/Redis/index.html">
+<meta property="og:site_name" content="KingDomPan's Secret Garden">
+<meta property="og:description" content="什么是Redis
+KV Store 用来补充关系型数据库
+可以持久化的cache, 可以保存一些频繁访问的数据
+高性能的内存数据库
+数据结构服务器, 可以保存复杂的数据类型
+缺点: 数据库容量受到物理内存的限制, 不能用作海量数据的高性能读写, 并且没有原生的可扩展机制, 要依赖客户端实现分布式读写, 因此适合场景主要局限在较小量的高性能操作和运算上">
+<meta property="og:image" content="http://yoursite.com/images/Redis/rehash.png">
+<meta property="og:image" content="http://yoursite.com/images/Redis/redisWatch.png">
+<meta property="og:image" content="http://yoursite.com/images/Redis/trans.png">
+<meta property="og:updated_time" content="2016-01-31T07:41:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis">
+<meta name="twitter:description" content="什么是Redis
+KV Store 用来补充关系型数据库
+可以持久化的cache, 可以保存一些频繁访问的数据
+高性能的内存数据库
+数据结构服务器, 可以保存复杂的数据类型
+缺点: 数据库容量受到物理内存的限制, 不能用作海量数据的高性能读写, 并且没有原生的可扩展机制, 要依赖客户端实现分布式读写, 因此适合场景主要局限在较小量的高性能操作和运算上">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">KingDomPan</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">左手前端, 右手后端, 我, 全栈了!</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">真的我</a></li>
+				        
+							<li><a href="/read">读书</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/KingDomPan" title="github">github</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/Data/" style="font-size: 16.67px;">Data</a> <a href="/tags/Fetch/" style="font-size: 10px;">Fetch</a> <a href="/tags/Fiddler/" style="font-size: 10px;">Fiddler</a> <a href="/tags/GC/" style="font-size: 10px;">GC</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/JRebel/" style="font-size: 10px;">JRebel</a> <a href="/tags/JS/" style="font-size: 13.33px;">JS</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Jpa/" style="font-size: 16.67px;">Jpa</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/N-1/" style="font-size: 10px;">N + 1</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/ReactJs/" style="font-size: 10px;">ReactJs</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Seesion/" style="font-size: 10px;">Seesion</a> <a href="/tags/Spring/" style="font-size: 20px;">Spring</a> <a href="/tags/Spring-Security-安全验证/" style="font-size: 10px;">Spring Security 安全验证</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/缓存/" style="font-size: 13.33px;">缓存</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">左手前端, 右手后端, 我, 全栈了!</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">KingDomPan</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="null" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">KingDomPan</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">左手前端, 右手后端, 我, 全栈了!</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">真的我</a></li>
+		        
+					<li><a href="/read">读书</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/KingDomPan" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-Redis" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/24/Redis/" class="article-date">
+  	<time datetime="2015-07-24T12:44:39.000Z" itemprop="datePublished">2015-07-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Redis
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="u4EC0_u4E48_u662FRedis"><a href="#u4EC0_u4E48_u662FRedis" class="headerlink" title="什么是Redis"></a>什么是Redis</h5><ul>
+<li>KV Store 用来补充关系型数据库</li>
+<li>可以持久化的cache, 可以保存一些频繁访问的数据</li>
+<li>高性能的内存数据库</li>
+<li>数据结构服务器, 可以保存复杂的数据类型</li>
+<li>缺点: 数据库容量受到物理内存的限制, 不能用作海量数据的高性能读写, 并且没有原生的可扩展机制, 要依赖客户端实现分布式读写, 因此适合场景主要局限在较小量的高性能操作和运算上</li>
+</ul>
+<a id="more"></a>
+<h5 id="Redis_u4E3A_u4EC0_u4E48_u6BD4Memcached_u5FEB"><a href="#Redis_u4E3A_u4EC0_u4E48_u6BD4Memcached_u5FEB" class="headerlink" title="Redis为什么比Memcached快"></a>Redis为什么比Memcached快</h5><ul>
+<li>redis带有持久化功能, 后者是完全基于内存的</li>
+<li>CAS问题, Memcached中防止竞争修改资源的一种手段, 需要为每个key设置一个隐藏的cas token, 相当于版本号, 在数据量上大幅度提升的时候会有性能上的差别</li>
+<li>单台Redis的存放数据必须比物理内存小, 冷热数据的分离, 基于持久化技术, Redis2.0的VM概念</li>
+<li>Redis的VM实现是重复造轮子, VM的实现不是基于OS原有的page的概念, 缩小4k的粒度控制</li>
+<li>用get/set方式使用Redis, 复用key, 使得原有的相同的内存空间可以存放100倍以上的数据</li>
+<li>使用aof代替snapshot(存储方式), 默认的是snapshot, 实现方法是定时将内存的快照数据持久化到硬盘, 缺点是crash之后会出现数据丢失的情况. aof模式(append only mode), 在写入内存数据的同时将操作命令保存到日志文件(binlog), (其实这样无法保证数据的原子操作性), 使用Replicatio来代替, 复制基本没有延迟</li>
+<li>Redis作者说, 平均到单个核上, 在单条数据不大的情况下, Redis的性能会更好. Redis是单线程的, 只能使用一个CPU内核, 而Mem是多线程的, 所以对于一个实例来说, 性能上肯定是Mem占据优势.</li>
+<li>所以性能上不是2个最主要的差别!!!</li>
+</ul>
+<h5 id="Redis_u6570_u636E_u7C7B_u578B"><a href="#Redis_u6570_u636E_u7C7B_u578B" class="headerlink" title="Redis数据类型"></a>Redis数据类型</h5><ul>
+<li>string 字符串 (set get incr decr mget)<ul>
+<li>获取字符串长度</li>
+<li>往字符串里append</li>
+<li>设置和获取某一段的内容</li>
+<li>设置和获取字符串的某一位</li>
+<li>批量设置一系列字符串的内容</li>
+<li>使用场景: 不仅仅是stirng, 也可以是数字, 比如ip, 通过原子递增保持计数</li>
+</ul>
+</li>
+<li>hash 散列表, 其实就是字典 (hset hget hgetall)<ul>
+<li>应用场景1: 用户信息 id: {name: ‘’, age: ‘’, birthday: ‘’}</li>
+</ul>
+</li>
+<li>list 列表 lpush,rpush,lpop,rpop,lrange,BLPOP(阻塞版, 主要是为了避免轮询)<ul>
+<li>应用场景1: 最新消息的排行版</li>
+<li>应用场景2: 实现消息队列</li>
+<li>实现机制: 双向链表(发送缓冲队列)</li>
+</ul>
+</li>
+<li>set 无序集合 (sadd, srem, spop, sdiff, smembers, sunion)<ul>
+<li>自动排重功能</li>
+<li>提供了判断一个成员是否在一个set集合里面的接口</li>
+<li>应用场景1: 比如微博中, 每个人的好友列表都存放在一个set中, 这样求2个人的共同好友, 只要求一下交集</li>
+<li>交集, 并集, 差集</li>
+<li>实现方式: 内部是一个value永远为null的HashMap, 实际上就是通过计算hash的方式来快速排重的, 这也是set提供判断一个成员是否在集合中的原因.</li>
+</ul>
+</li>
+<li>zset 有序集合 (zadd, zrange, zrem, zcard)<ul>
+<li>应用场景1: 以某个条件为权重, 比如按顶的次数排序</li>
+<li>ZREVRANGE命令可以用来按照得分来获取前100名的用户, ZRANK可以用来获取用户排名, 非常直接而且操作容易</li>
+<li>定义优先级自动排序</li>
+<li>需要精准设置过期时间的应用: 按照过去时间来清除redis中的数据, 设置可以把该字段当成是数据中的索引来删除数据库中的字段.</li>
+<li>实现原理: 内部使用HashMap和跳跃表(SkipList)来保证数据的存储有有序, HashMap里面放的是成员到Score(优先级)的映射, 而跳跃表里面存放的是所有的成员, 排序依据是HashMap里存的score, 使用跳跃表的结构可以获得比较高的查找效率, 并且在实现上比较简单</li>
+</ul>
+</li>
+</ul>
+<h5 id="Redis_u5185_u5B58_u5B58_u50A8_u539F_u7406"><a href="#Redis_u5185_u5B58_u5B58_u50A8_u539F_u7406" class="headerlink" title="Redis内存存储原理"></a>Redis内存存储原理</h5><ul>
+<li>string<ul>
+<li>string存储原理<ul>
+<li>二进制安全的, 可以存放一个图片或者对象的序列化值 maxSize = 512M</li>
+<li>int len; int free; char buf[]; 长度, 剩余长度, 实际存储位置<ul>
+<li>字符串拼接处理策略<ul>
+<li>初始化数据, free = 0</li>
+<li>append长度为K的数据, 重新分配空间, free大小为K+N+1, N为len</li>
+<li>再次append, 如果K1+1&lt;free, 不再重新分配, 否则执行上一条策略</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>string使用场景<ul>
+<li>使用INCR命令作为原子计数器</li>
+<li>APPEND追加字符串</li>
+<li>作为GETRANGE和SETRANGE的访问向量</li>
+<li>小空间编码大数据, GETBIT 和 SETBIT创建一个Redis支持的Bloom过滤器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>hash<ul>
+<li>hash存储原理(每个字典使用2个hash, 用于实现渐进式的rehash)<ul>
+<li>实际上就是Java中的HashMap的实际, 只不过是基于C语句的实现</li>
+<li>rehash实际上是一次表的扩容, 或者说是修改表的容量, 将ht(0)复制到ht(1), 并将1作为0的过程</li>
+<li><img src="/images/Redis/rehash.png" alt="rehash"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>list<ul>
+<li>list存储原理<ul>
+<li>一个列表做多包含(2^32)-1个元素, 访问列表头尾元素超级快, 中间部分需要O(n)</li>
+<li>listNode <em>head, </em>tail; long len;  复制函数, 释放函数, 比对函数</li>
+<li><strong>使用双端链表</strong><ul>
+<li>事务模块中来按顺序保存输入的命令</li>
+<li>服务器模块中来保存多个客户端</li>
+<li>订阅/发送模块来保存订阅模式的多个客户端</li>
+<li>事件模块来保存事件时间(time event)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用场景<ul>
+<li>社交网络中建立一个线性的时间模型, LPUSH用户的最新时间元素, 使用LRANGE去接收一些最近插入的元素</li>
+<li>使用LPUSH和LTRIM去创建一个永远不会超过指定元素数据的列表, 但是记住最后的N个元素</li>
+<li>列表被用来作为消息传递(消息队列)</li>
+<li>BLPOP命令, 避免轮询</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>set<ul>
+<li>set存储原理<ul>
+<li>O(1)完成元素的删除和添加, O(1)测试是否包含该元素, 最多支持(2^32)-1个元素</li>
+</ul>
+</li>
+<li>使用场景<ul>
+<li>追踪一件事情, 比如记录访问IP</li>
+<li>擅长表现关系</li>
+<li>使用SPOP或者SRANDMEMBER命令随意抽取元素</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>zset<ul>
+<li>zset存储原理<ul>
+<li>hashMap + 跳跃表</li>
+<li>以非常快的速度(O(log(N)))添加, 删除, 更新元素</li>
+<li>元素是有序的, 所以可以根据score很快的获取一个元素的范围</li>
+<li>可以完成很多对性能有极端要求的任务</li>
+</ul>
+</li>
+<li>zset使用场景<ul>
+<li>在线游戏中可以ZRANK和ZRANGE查看顶级用户或者用户的排行榜</li>
+<li>有序集合常常被用来索引存储在Redis中的数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="Redis_u5176_u4ED6_u529F_u80FD"><a href="#Redis_u5176_u4ED6_u529F_u80FD" class="headerlink" title="Redis其他功能"></a>Redis其他功能</h5><ul>
+<li>消息订阅: 对一个key进行了消息发布后, 所有订阅它的客户端都会收到相应的消息, 最主要的应用场景就是普通的即时聊天, 群聊等.</li>
+<li>subscribe rain</li>
+<li>publish rain ‘my love is ynn’ 返回订阅该key的客户端个数</li>
+</ul>
+<h5 id="Redis_u4E8B_u52A1"><a href="#Redis_u4E8B_u52A1" class="headerlink" title="Redis事务"></a>Redis事务</h5><ul>
+<li><strong>transaction</strong></li>
+<li><strong>watch</strong> 对key进行watch, 如果发现了更改, 那么transaction就会发现并拒绝执行<br><img src="/images/Redis/redisWatch.png" alt="redis的检测, 事务, 执行"></li>
+</ul>
+<h5 id="Redis_u4E8B_u52A1_u539F_u7406"><a href="#Redis_u4E8B_u52A1_u539F_u7406" class="headerlink" title="Redis事务原理"></a>Redis事务原理</h5><ul>
+<li>事务用法: multi exec命令包围, 处在这2条命令中的一条或者多条命令, 会以FIFO的方法运行</li>
+<li>Redis的事务并不保证关系型数据库的ACID性质, 因此因为服务器失败而造成的数据不一致会存在</li>
+<li>事务原理:<ul>
+<li>MULTI<ul>
+<li>multiCommand 对redisClient结构的flags进行检查和设置<ul>
+<li>首先检查flags, 确保没有嵌套使用MULTI命令</li>
+<li>检查通过, 那么就用位操作, 将REDIS_MULTI这个FLAG打开</li>
+<li>最后向客户端返回ok</li>
+</ul>
+</li>
+<li>processCommand(redisClient <em>c) 处理命令, 如果命令不是EXEC, discard, multi, watch命令, 那么命令入队列queueMultiCommand(redisClient </em>c)</li>
+<li>queueMultiCommand(redisClient *c)函数将要执行的命令, 命令的参数个数以及命令的参数放进multiCmd结构中, 并将这个结构保存到redisClient.mastate.command数组的末尾, 从而形成了一个保存了要执行的命令的FIFO队列信息<img src="/images/Redis/trans.png" alt="事务命令数组"></li>
+<li>execCommand(redisClient *c)执行事务<ul>
+<li>如果没执行过MULTI就报错</li>
+<li>如果在执行事务前, 有监视key的改变(watch), 那么取消事务</li>
+<li>为了保证事务的一致性和原子性<ul>
+<li>如果处在AOF模式中, 向AOF文件发送MULTI</li>
+<li>如果处在复制模式中, 向附属结点发送MULTI</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>开始执行事务中的所有命令</li>
+<li>恢复所有的参数和命令</li>
+<li>释放事务资源和重置事务状态 freeClientMultiState initClientMultiState</li>
+</ul>
+</li>
+<li>取消事务(discard)命令实现<ul>
+<li>discardTransaction 释放事务资源和重置事务状态, 关闭FLAG, 取消所有对KEY的监控</li>
+<li>discardCommand 放弃执行事务命令, 如果没有执行MULTI, 那么就报错, 否则调用 discardTransaction, 最后返回OK</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/12/PromiseFetch/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Promise及Fetch源码解析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/24/Hibernate/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hibernate N + 1, 二级缓存</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Redis" data-title="Redis" data-url="http://yoursite.com/2015/07/24/Redis/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"KingDomPan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 KingDomPan
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
