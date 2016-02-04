@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>ReactReflux | KingDomPan&#39;s Secret Garden</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="RefluxReflux是根据React的flux创建的单向数据流类库, Reflux的单向数据流模式主要由actions和stores组成. 例如, 当组件list新增item时, 会调用actions的某个方法(如addItem(data)), 并将新的数据当参数传递进去, 通过事件机制, 数据会传递到stores中, stores可以向服务器发起请求, 并更新数据数据库. 数据更新成功后,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReactReflux">
+<meta property="og:url" content="http://yoursite.com/2016/02/04/ReactReflux/index.html">
+<meta property="og:site_name" content="KingDomPan's Secret Garden">
+<meta property="og:description" content="RefluxReflux是根据React的flux创建的单向数据流类库, Reflux的单向数据流模式主要由actions和stores组成. 例如, 当组件list新增item时, 会调用actions的某个方法(如addItem(data)), 并将新的数据当参数传递进去, 通过事件机制, 数据会传递到stores中, stores可以向服务器发起请求, 并更新数据数据库. 数据更新成功后,">
+<meta property="og:image" content="http://yoursite.com/images/ReactJs/reflux.png">
+<meta property="og:updated_time" content="2016-02-04T05:33:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ReactReflux">
+<meta name="twitter:description" content="RefluxReflux是根据React的flux创建的单向数据流类库, Reflux的单向数据流模式主要由actions和stores组成. 例如, 当组件list新增item时, 会调用actions的某个方法(如addItem(data)), 并将新的数据当参数传递进去, 通过事件机制, 数据会传递到stores中, stores可以向服务器发起请求, 并更新数据数据库. 数据更新成功后,">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">KingDomPan</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">半吊子的Web工程师</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">真的我</a></li>
+				        
+							<li><a href="/read">读书</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/KingDomPan" title="github">github</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/Akka/" style="font-size: 10px;">Akka</a> <a href="/tags/Data/" style="font-size: 16.67px;">Data</a> <a href="/tags/Fetch/" style="font-size: 10px;">Fetch</a> <a href="/tags/Fiddler/" style="font-size: 10px;">Fiddler</a> <a href="/tags/Finagle/" style="font-size: 10px;">Finagle</a> <a href="/tags/GC/" style="font-size: 10px;">GC</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/JRebel/" style="font-size: 10px;">JRebel</a> <a href="/tags/JS/" style="font-size: 13.33px;">JS</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Jpa/" style="font-size: 16.67px;">Jpa</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/N-1/" style="font-size: 10px;">N + 1</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/ReactJs/" style="font-size: 13.33px;">ReactJs</a> <a href="/tags/ReactRouter/" style="font-size: 10px;">ReactRouter</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Scala/" style="font-size: 16.67px;">Scala</a> <a href="/tags/Seesion/" style="font-size: 10px;">Seesion</a> <a href="/tags/Spring/" style="font-size: 20px;">Spring</a> <a href="/tags/Spring-Security-安全验证/" style="font-size: 10px;">Spring Security 安全验证</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/缓存/" style="font-size: 13.33px;">缓存</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">半吊子的Web工程师</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">KingDomPan</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="null" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">KingDomPan</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">半吊子的Web工程师</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">真的我</a></li>
+		        
+					<li><a href="/read">读书</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/KingDomPan" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-ReactReflux" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/04/ReactReflux/" class="article-date">
+  	<time datetime="2016-02-04T05:28:51.000Z" itemprop="datePublished">2016-02-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ReactReflux
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Reflux"><a href="#Reflux" class="headerlink" title="Reflux"></a>Reflux</h4><p>Reflux是根据React的flux创建的单向数据流类库, Reflux的单向数据流模式主要由actions和stores组成. 例如, 当组件list新增item时, 会调用actions的某个方法(如addItem(data)), 并将新的数据当参数传递进去, 通过事件机制, 数据会传递到stores中, stores可以向服务器发起请求, 并更新数据数据库. 数据更新成功后, 还是通过事件机制传递的组件list当中, 并更新ui.<br><img src="/images/ReactJs/reflux.png" alt="Flux Dispatcher"></p>
+<a id="more"></a>
+<h4 id="u793A_u4F8B_u4EE3_u7801"><a href="#u793A_u4F8B_u4EE3_u7801" class="headerlink" title="示例代码"></a>示例代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** @jsx React.DOM */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Actions = Reflux.createActions([</span><br><span class="line">    <span class="string">'addItem'</span>,</span><br><span class="line">    <span class="string">'testItem'</span></span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Store = Reflux.createStore(&#123;</span><br><span class="line">    items: [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    <span class="comment">// 监听Actions的各个函数</span></span><br><span class="line">    <span class="comment">// 只要Actions的函数被调用, 此函数的参数将会被传递到Store的OnXX处理方法</span></span><br><span class="line">    listenables: [Actions],</span><br><span class="line">    onAddItem: <span class="function"><span class="keyword">function</span> (<span class="params">model</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.items.unshift(model);</span><br><span class="line">        <span class="keyword">this</span>.trigger(<span class="keyword">this</span>.items);</span><br><span class="line">    &#125;,</span><br><span class="line">    onTestItem: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"OnTestItem"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Component = React.createClass(&#123;</span><br><span class="line">    <span class="comment">// 使用mixins监听Store, 只要Store发生调用, 就调用Component的OnStatusChange方法</span></span><br><span class="line">    mixins: [Reflux.listenTo(Store, <span class="string">'onStatusChange'</span>)],</span><br><span class="line">    getInitialState: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;list: []&#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    onStatusChange: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setState(&#123;list: Store.items&#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    render: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="xml"><span class="tag">&lt;<span class="title">div</span>&gt;</span></span><br><span class="line">                &#123;</span><br><span class="line">                    this.state.list.map(function (item) &#123;</span><br><span class="line">                        return <span class="tag">&lt;<span class="title">p</span>&gt;</span>&#123;item&#125;<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">                    &#125;)</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">        )</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">React.render(<span class="xml"><span class="tag">&lt;<span class="title">Component</span> /&gt;</span>, document.body);</span><br><span class="line"></span><br><span class="line">// 现在调用Actions的函数</span><br><span class="line">/**</span><br><span class="line">var x = 3;</span><br><span class="line">window.setInterval(function() &#123;</span><br><span class="line">    Actions.addItem(x, 1000);</span><br><span class="line">    x += 1;</span><br><span class="line">&#125;, 2000);</span><br><span class="line">*/</span><br><span class="line">Actions.testItem();</span></span><br></pre></td></tr></table></figure>
+<h4 id="u4E0Eflux_u7684_u76F8_u540C_u70B9"><a href="#u4E0Eflux_u7684_u76F8_u540C_u70B9" class="headerlink" title="与flux的相同点"></a>与flux的相同点</h4><ul>
+<li>有actions</li>
+<li>有stores</li>
+<li>单向数据流</li>
+</ul>
+<h4 id="u4E8Eflux_u7684_u4E0D_u540C_u70B9"><a href="#u4E8Eflux_u7684_u4E0D_u540C_u70B9" class="headerlink" title="于flux的不同点"></a>于flux的不同点</h4><ul>
+<li>通过内部扩展actions的行为, 移除了单例的dispacther</li>
+<li>stores可以监听actions的行为, 无需进行冗杂的switch判断</li>
+<li>stores可以互相监听, 进一步的数据聚合操作, 类似于map/reduce</li>
+<li>waitFor被连续和平行的数据流所替代</li>
+</ul>
+<h4 id="u521B_u5EFAAction"><a href="#u521B_u5EFAAction" class="headerlink" title="创建Action"></a>创建Action</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用这个事件就会触发相应的事件, 在store中监听这个函数, 并作相应的处理</span></span><br><span class="line"><span class="keyword">var</span> ToDoActions = Reflux.createAction(options); <span class="comment">// 返回一个定义个函数对象, 类型声明接口</span></span><br></pre></td></tr></table></figure>
+<h4 id="u521B_u5EFAstore_u5E76_u76D1_u542Caction"><a href="#u521B_u5EFAstore_u5E76_u76D1_u542Caction" class="headerlink" title="创建store并监听action"></a>创建store并监听action</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> store = Reflux.createStore(&#123;</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.listenTo(ToDoActions.addItem, <span class="string">'onAddItem'</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  onAddItem: <span class="function"><span class="keyword">function</span>(<span class="params">model</span>) </span>&#123;&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="u5F02_u6B65action"><a href="#u5F02_u6B65action" class="headerlink" title="异步action"></a>异步action</h4><p>为操作提供了相应的promise接口<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getAll = Reflux.createAction(&#123;</span><br><span class="line">    asyncResult: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> TodoStore = Reflux.createStore(&#123;</span><br><span class="line">    init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.listenTo(getAll, <span class="string">'getAll'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    getAll: <span class="function"><span class="keyword">function</span>(<span class="params">model</span>) </span>&#123;</span><br><span class="line">        $.get(<span class="string">'/all'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (data) &#123;</span><br><span class="line">                getAll.completed(data);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                getAll.failed(data);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> getAll = Reflux.createAction(&#123;</span><br><span class="line">    asyncResult: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> TodoStore = Reflux.createStore(&#123;</span><br><span class="line">    init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.listenTo(getAll, <span class="string">'getAll'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    getAll: <span class="function"><span class="keyword">function</span>(<span class="params">model</span>) </span>&#123;</span><br><span class="line">        $.get(<span class="string">'/all'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (data) &#123;</span><br><span class="line">                getAll.completed(data);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                getAll.failed(data);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">getAll(&#123;</span><br><span class="line">    name: <span class="string">'xxx'</span></span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> err;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="Action_hooks"><a href="#Action_hooks" class="headerlink" title="Action hooks"></a>Action hooks</h4><p>Reflux为每个action都提供了两个hook方法</p>
+<ul>
+<li>preEmit(params), action emit之前调用, 参数是action传递过来的, 返回值会传递给shouldEmit</li>
+<li>shouldEmit(params) action emit之前调用, 参数默认是action传递, 如果preEmit有返回值, 则是preEmit返回值, 返回值决定是否emit<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> addItem = Reflux.createAction(&#123;</span><br><span class="line">    preEmit: <span class="function"><span class="keyword">function</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'preEmit:'</span> + params);</span><br><span class="line">    &#125;,</span><br><span class="line">    shouldEmit: <span class="function"><span class="keyword">function</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'shouldEmit:'</span> + params);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> TodoStore = Reflux.createStore(&#123;</span><br><span class="line">    init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.listenTo(addItem, <span class="string">'addItem'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    addItem: <span class="function"><span class="keyword">function</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'addItem:'</span> + params);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">addItem(<span class="string">'xxx'</span>);</span><br><span class="line"><span class="comment">// 控制台打印</span></span><br><span class="line"><span class="comment">// $ preEmit:xxx</span></span><br><span class="line"><span class="comment">// $ shouldEmit:xxx</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> addItem = Reflux.createAction(&#123;</span><br><span class="line">    preEmit: <span class="function"><span class="keyword">function</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'preEmit:'</span> + params);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">324</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    shouldEmit: <span class="function"><span class="keyword">function</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'shouldEmit:'</span> + params);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> TodoStore = Reflux.createStore(&#123;</span><br><span class="line">    init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.listenTo(addItem, <span class="string">'addItem'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    addItem: <span class="function"><span class="keyword">function</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'addItem:'</span> + params);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">addItem(<span class="string">'xxx'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 控制台打印</span></span><br><span class="line"><span class="comment">// $ preEmit: xxx</span></span><br><span class="line"><span class="comment">// $ shouldEmit: 324</span></span><br><span class="line"><span class="comment">// $ addItem: 324</span></span><br></pre></td></tr></table></figure>
+<h4 id="Action_methods"><a href="#Action_methods" class="headerlink" title="Action methods"></a>Action methods</h4><p>当需要给所有的actiont添加公用方法时, 可以这么干<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Reflux.ActionMethods.print = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(str);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> addItem = Reflux.createAction();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> TodoStore = Reflux.createStore(&#123;</span><br><span class="line">    init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.listenTo(addItem, <span class="string">'addItem'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    addItem: <span class="function"><span class="keyword">function</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'addItem:'</span> + params);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">addItem.print(<span class="string">'xxx'</span>);</span><br></pre></td></tr></table></figure></p>
+<h4 id="trigger_2C_triggerAsync_2C_triggerPromise"><a href="#trigger_2C_triggerAsync_2C_triggerPromise" class="headerlink" title="trigger, triggerAsync, triggerPromise"></a>trigger, triggerAsync, triggerPromise</h4><p><strong>直接调用addItem()实际上是调用trigger或者triggerAsync或者triggerPromise, 它们区别在于</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> addItem = Reflux.createAction(); addItem(); <span class="comment">// #默认调用triggerAsync，相当于addItem.triggerAsync()</span></span><br><span class="line"><span class="keyword">var</span> addItem = Reflux.createAction(&#123;sync:<span class="literal">true</span>&#125;);addItem(); <span class="comment">// #默认调用trigger，相当于addItem.trigger()</span></span><br><span class="line"><span class="keyword">var</span> addItem = Reflux.createAction(&#123;asyncResult:<span class="literal">true</span>&#125;);addItem(); <span class="comment">// #默认调用triggerPromise，相当于addItem.triggerPromise()</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="u521B_u5EFAStore"><a href="#u521B_u5EFAStore" class="headerlink" title="创建Store"></a>创建Store</h4><p>相应Action的行为, 并同服务器交互</p>
+<ul>
+<li><p>监听单个Action</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> addItem = Reflux.createAction();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> TodoStore = Reflux.createStore(&#123;</span><br><span class="line">    init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.listenTo(addItem, <span class="string">'addItem'</span>); <span class="comment">// 在这里进行监听操作</span></span><br><span class="line">    &#125;,</span><br><span class="line">    addItem: <span class="function"><span class="keyword">function</span>(<span class="params">model</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(model);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">addItem(&#123;</span><br><span class="line">    name: <span class="string">'xxx'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>监听多个Action</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> TodoActions = Reflux.createActions([</span><br><span class="line">    <span class="string">'item1'</span>,</span><br><span class="line">    <span class="string">'item2'</span>,</span><br><span class="line">    <span class="string">'item3'</span></span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> TodoStore = Reflux.createStore(&#123;</span><br><span class="line">  <span class="comment">// 监听多个action方法的第二种写法</span></span><br><span class="line">  <span class="comment">// listenables: [ToDoActions]</span></span><br><span class="line">    init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.listenToMany(TodoActions);</span><br><span class="line">    &#125;,</span><br><span class="line">    onItem1: <span class="function"><span class="keyword">function</span>(<span class="params">model</span>) </span>&#123; <span class="comment">// 方法名规范</span></span><br><span class="line">        <span class="built_in">console</span>.log(model);</span><br><span class="line">    &#125;,</span><br><span class="line">    onItem2: <span class="function"><span class="keyword">function</span>(<span class="params">model</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(model);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">TodoActions.item1(&#123;</span><br><span class="line">    name: <span class="string">'xxx'</span></span><br><span class="line">&#125;);</span><br><span class="line">TodoActions.item2(&#123;</span><br><span class="line">    name: <span class="string">'yyy'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Store_Methods"><a href="#Store_Methods" class="headerlink" title="Store Methods"></a>Store Methods</h4><p>扩展Sotre的公用方法有两种方式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Reflux.StoreMethods.print = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(str);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> addItem = Reflux.createAction();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> TodoStore = Reflux.createStore(&#123;</span><br><span class="line">    init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.listenTo(addItem, <span class="string">'addItem'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    addItem: <span class="function"><span class="keyword">function</span>(<span class="params">model</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(model);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">TodoStore.print(<span class="string">'rrr'</span>);</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Mixins = &#123;</span><br><span class="line">    print: <span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> addItem = Reflux.createAction();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> TodoStore = Reflux.createStore(&#123;</span><br><span class="line">    mixins: [Mixins],</span><br><span class="line">    init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.listenTo(addItem, <span class="string">'addItem'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    addItem: <span class="function"><span class="keyword">function</span>(<span class="params">model</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(model);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">TodoStore.print(<span class="string">'rrr'</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="u540C_u7EC4_u4EF6_u7ED3_u5408"><a href="#u540C_u7EC4_u4EF6_u7ED3_u5408" class="headerlink" title="同组件结合"></a>同组件结合</h4><p>Action, Store和组件这三者是通过事件机制响应变化的, 构建组件的时候首先需要监听Store的状态. 先定义Action和Store</p>
+<ul>
+<li>当组件的生命周期结束时需要解除对Store的监听</li>
+<li>当Store调用trigger时, 才会执行onStatusChange函数, 所以每次Store更新时, 需要手动调用trigger函数<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> TodoActions = Reflux.createActions([</span><br><span class="line">    <span class="string">'getAll'</span></span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> TodoStore = Reflux.createStore(&#123;</span><br><span class="line">    items: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">    listenables: [TodoActions],</span><br><span class="line">    onGetAll: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.trigger(<span class="keyword">this</span>.items); <span class="comment">// 手动触发, 执行ViewComponent更新</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> TodoComponent = React.createClass(&#123;</span><br><span class="line">    getInitialState: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            list: []</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    onStatusChange: <span class="function"><span class="keyword">function</span>(<span class="params">list</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">            list: list</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    componentDidMount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.unsubscribe = TodoStore.listen(<span class="keyword">this</span>.onStatusChange); <span class="comment">// 监听</span></span><br><span class="line">        TodoActions.getAll(); <span class="comment">// 触发Store</span></span><br><span class="line">    &#125;,</span><br><span class="line">    componentWillUnmount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.unsubscribe();</span><br><span class="line">    &#125;,</span><br><span class="line">    render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ( <span class="xml"><span class="tag">&lt;<span class="title">div</span>&gt;</span> &#123;</span><br><span class="line">            this.state.list.map(function(item) &#123;</span><br><span class="line">                return <span class="tag">&lt;<span class="title">p</span>&gt;</span> &#123;</span><br><span class="line">                    item</span><br><span class="line">                &#125; <span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125; <span class="tag">&lt;/<span class="title">div</span>&gt;</span>)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">React.render(<span class="xml"><span class="tag">&lt;<span class="title">TodoComponent</span> /&gt;</span> , document.getElementById('container'));</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Mixins"><a href="#Mixins" class="headerlink" title="Mixins"></a>Mixins</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> TodoComponent = React.createClass(&#123;</span><br><span class="line">    mixins: [Reflux.ListenerMixin], <span class="comment">// 混入监听器</span></span><br><span class="line">    getInitialState: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            list: []</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    onStatusChange: <span class="function"><span class="keyword">function</span>(<span class="params">list</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">            list: list</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    componentDidMount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.unsubscribe = TodoStore.listen(<span class="keyword">this</span>.onStatusChange);</span><br><span class="line">        TodoActions.getAll();</span><br><span class="line">    &#125;,</span><br><span class="line">    render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ( <span class="xml"><span class="tag">&lt;<span class="title">div</span>&gt;</span> &#123;</span><br><span class="line">            this.state.list.map(function(item) &#123;</span><br><span class="line">                return <span class="tag">&lt;<span class="title">p</span>&gt;</span> &#123;</span><br><span class="line">                    item</span><br><span class="line">                &#125; <span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125; <span class="tag">&lt;/<span class="title">div</span>&gt;</span>)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">React.render(<span class="xml"><span class="tag">&lt;<span class="title">TodoComponent</span> /&gt;</span> , document.getElementById('container'));</span></span><br></pre></td></tr></table></figure>
+<h4 id="Reflux-listenTo"><a href="#Reflux-listenTo" class="headerlink" title="Reflux.listenTo"></a>Reflux.listenTo</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> TodoComponent = React.createClass(&#123;</span><br><span class="line">    mixins: [Reflux.listenTo(TodoStore, <span class="string">'onStatusChange'</span>)],</span><br><span class="line">    getInitialState: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            list: []</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    onStatusChange: <span class="function"><span class="keyword">function</span>(<span class="params">list</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">            list: list</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    componentDidMount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        TodoActions.getAll();</span><br><span class="line">    &#125;,</span><br><span class="line">    render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ( <span class="xml"><span class="tag">&lt;<span class="title">div</span>&gt;</span> &#123;</span><br><span class="line">            this.state.list.map(function(item) &#123;</span><br><span class="line">                return <span class="tag">&lt;<span class="title">p</span>&gt;</span> &#123;</span><br><span class="line">                    item</span><br><span class="line">                &#125; <span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125; <span class="tag">&lt;/<span class="title">div</span>&gt;</span>)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">React.render(<span class="xml"><span class="tag">&lt;<span class="title">TodoComponent</span> /&gt;</span> , document.getElementById('container'));</span></span><br></pre></td></tr></table></figure>
+<h4 id="Reflux-connect"><a href="#Reflux-connect" class="headerlink" title="Reflux.connect"></a>Reflux.connect</h4><p><strong>数据会自动更新到state的list当中</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> TodoComponent = React.createClass(&#123;</span><br><span class="line">    mixins: [Reflux.connect(TodoStore, <span class="string">'list'</span>)],</span><br><span class="line">    getInitialState: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            list: []</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    componentDidMount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        TodoActions.getAll();</span><br><span class="line">    &#125;,</span><br><span class="line">    render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ( <span class="xml"><span class="tag">&lt;<span class="title">div</span>&gt;</span> &#123;</span><br><span class="line">            this.state.list.map(function(item) &#123;</span><br><span class="line">                return <span class="tag">&lt;<span class="title">p</span>&gt;</span> &#123;</span><br><span class="line">                    item</span><br><span class="line">                &#125; <span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125; <span class="tag">&lt;/<span class="title">div</span>&gt;</span>)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">React.render(<span class="xml"><span class="tag">&lt;<span class="title">TodoComponent</span> /&gt;</span> , document.getElementById('container'));</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="Reflux-connectFilter"><a href="#Reflux-connectFilter" class="headerlink" title="Reflux.connectFilter"></a>Reflux.connectFilter</h4><p><strong>对数据加了一层过滤器</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> TodoComponent = React.createClass(&#123;</span><br><span class="line">    mixins: [Reflux.connectFilter(TodoStore, <span class="string">'list'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">list</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.filter(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> item &gt; <span class="number">1</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;)],</span><br><span class="line">    getInitialState: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            list: []</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    componentDidMount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        TodoActions.getAll();</span><br><span class="line">    &#125;,</span><br><span class="line">    render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ( <span class="xml"><span class="tag">&lt;<span class="title">div</span>&gt;</span> &#123;</span><br><span class="line">            this.state.list.map(function(item) &#123;</span><br><span class="line">                return <span class="tag">&lt;<span class="title">p</span>&gt;</span> &#123;</span><br><span class="line">                    item</span><br><span class="line">                &#125; <span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125; <span class="tag">&lt;/<span class="title">div</span>&gt;</span>)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">React.render(<span class="xml"><span class="tag">&lt;<span class="title">TodoComponent</span> /&gt;</span> , document.getElementById('container'));</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/12/04/ReactRouter/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ReactRouter</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ReactReflux" data-title="ReactReflux" data-url="http://yoursite.com/2016/02/04/ReactReflux/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"KingDomPan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 KingDomPan
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

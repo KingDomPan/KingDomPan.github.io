@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Scala-Language | KingDomPan&#39;s Secret Garden</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基本数据结构
+列表List val numbers = List(1, 2, 3, 4)
+集合Set Set(1, 1, 2)
+元组Tuple val hostPort = (&amp;quot;localhost&amp;quot;, 80)
+元组的取值 hostPort._1
+元组的特殊语法创建 1 -&amp;gt; 2
+
+
+映射Map Map(1 -&amp;gt; 2) Map(1 -&amp;gt; &amp;quot;one&amp;qu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala-Language">
+<meta property="og:url" content="http://yoursite.com/2015/09/12/Scala-Language/index.html">
+<meta property="og:site_name" content="KingDomPan's Secret Garden">
+<meta property="og:description" content="基本数据结构
+列表List val numbers = List(1, 2, 3, 4)
+集合Set Set(1, 1, 2)
+元组Tuple val hostPort = (&amp;quot;localhost&amp;quot;, 80)
+元组的取值 hostPort._1
+元组的特殊语法创建 1 -&amp;gt; 2
+
+
+映射Map Map(1 -&amp;gt; 2) Map(1 -&amp;gt; &amp;quot;one&amp;qu">
+<meta property="og:updated_time" content="2016-02-04T03:04:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala-Language">
+<meta name="twitter:description" content="基本数据结构
+列表List val numbers = List(1, 2, 3, 4)
+集合Set Set(1, 1, 2)
+元组Tuple val hostPort = (&amp;quot;localhost&amp;quot;, 80)
+元组的取值 hostPort._1
+元组的特殊语法创建 1 -&amp;gt; 2
+
+
+映射Map Map(1 -&amp;gt; 2) Map(1 -&amp;gt; &amp;quot;one&amp;qu">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">KingDomPan</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">半吊子的Web工程师</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">真的我</a></li>
+				        
+							<li><a href="/read">读书</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/KingDomPan" title="github">github</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/Akka/" style="font-size: 10px;">Akka</a> <a href="/tags/Data/" style="font-size: 16.67px;">Data</a> <a href="/tags/Fetch/" style="font-size: 10px;">Fetch</a> <a href="/tags/Fiddler/" style="font-size: 10px;">Fiddler</a> <a href="/tags/Finagle/" style="font-size: 10px;">Finagle</a> <a href="/tags/GC/" style="font-size: 10px;">GC</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/JRebel/" style="font-size: 10px;">JRebel</a> <a href="/tags/JS/" style="font-size: 13.33px;">JS</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Jpa/" style="font-size: 16.67px;">Jpa</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/N-1/" style="font-size: 10px;">N + 1</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/ReactJs/" style="font-size: 13.33px;">ReactJs</a> <a href="/tags/ReactRouter/" style="font-size: 10px;">ReactRouter</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Scala/" style="font-size: 16.67px;">Scala</a> <a href="/tags/Seesion/" style="font-size: 10px;">Seesion</a> <a href="/tags/Spring/" style="font-size: 20px;">Spring</a> <a href="/tags/Spring-Security-安全验证/" style="font-size: 10px;">Spring Security 安全验证</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/缓存/" style="font-size: 13.33px;">缓存</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">半吊子的Web工程师</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">KingDomPan</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="null" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">KingDomPan</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">半吊子的Web工程师</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">真的我</a></li>
+		        
+					<li><a href="/read">读书</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/KingDomPan" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-Scala-Language" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/12/Scala-Language/" class="article-date">
+  	<time datetime="2015-09-12T03:21:10.000Z" itemprop="datePublished">2015-09-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Scala-Language
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/">Scala</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程语言/">编程语言</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="u57FA_u672C_u6570_u636E_u7ED3_u6784"><a href="#u57FA_u672C_u6570_u636E_u7ED3_u6784" class="headerlink" title="基本数据结构"></a>基本数据结构</h4><ul>
+<li>列表List <code>val numbers = List(1, 2, 3, 4)</code></li>
+<li>集合Set <code>Set(1, 1, 2)</code></li>
+<li>元组Tuple <code>val hostPort = (&quot;localhost&quot;, 80)</code><ul>
+<li>元组的取值 <code>hostPort._1</code></li>
+<li>元组的特殊语法创建 <code>1 -&gt; 2</code></li>
+</ul>
+</li>
+<li>映射Map <code>Map(1 -&gt; 2)</code> <code>Map(1 -&gt; &quot;one&quot;, 2 -&gt; &quot;two&quot;)</code></li>
+<li>选项Option: 表示一个有可能包含值的容器<ul>
+<li>Some</li>
+<li>None</li>
+<li>List.get返回的是Option类型, Option本身是泛型的</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h4 id="u51FD_u6570_u7EC4_u5408_u5B50"><a href="#u51FD_u6570_u7EC4_u5408_u5B50" class="headerlink" title="函数组合子"></a>函数组合子</h4><ul>
+<li><p>map: 对列表中的每个元素应用一个函数, 返回应用后的元素所组成的列表</p>
+<ul>
+<li><code>numbers.map((i: Int) =&gt; i * 2)</code></li>
+<li>传入一个部分应用函数 <code>numbers.map(timesTwo _)</code></li>
+</ul>
+</li>
+<li><p>foreach: 和map类型, 但是不返回值, 尝试返回的话, 返回类型是void</p>
+</li>
+<li><p>filter: 移除任何对传入函数计算结果为false的元素</p>
+<ul>
+<li><code>numbers.filter(_ % 2 != 0)</code></li>
+</ul>
+</li>
+<li><p>zip: 将两个列表的内容集合到一个对偶列表中</p>
+<ul>
+<li><code>List(1,2,3,4).zip(List(5,6,7,8))</code> 返回 List[(Int, String)]</li>
+</ul>
+</li>
+<li><p>partition: 将使用给定的谓词函数做分割列表</p>
+<ul>
+<li><code>numbers.partition(_ % 2 == 0)</code> 返回 (List[Int], List[Int])</li>
+</ul>
+</li>
+<li><p>find: 返回集合中第一个匹配谓词函数的元素</p>
+<ul>
+<li><code>numbers.find((i: Int) =&gt; i &gt; 5)</code> 返回 Option[Int] = Some(6)</li>
+</ul>
+</li>
+<li><p>drop &amp; dropWhile:</p>
+<ul>
+<li>drop: 将删除前i个元素:<ul>
+<li><code>numbers.drop(5)</code> 返回List(6,7,8,9,10)</li>
+</ul>
+</li>
+<li>dropWhile: 将删除元素直到找到第一个匹配谓词函数的元素<ul>
+<li><code>numbers.dropWhile(_ % 2 != 0)</code> 返回List(2,3,4,5,6,7,8,9)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>foldLeft: 其实类型于python的中reduce功能</p>
+<ul>
+<li><code>numbers.foldLeft(0)((m: Int, n: Int) =&gt; m + n)</code> 0为初始值, m为累加器</li>
+<li><code>numbers.foldLeft(0) { (m: Int, n: Int) =&gt; println(&quot;m: &quot; + m + &quot; n: &quot; + n); m + n }</code> 直接观察运行过程</li>
+</ul>
+</li>
+<li><p>foldRight: 和foldLeft相反</p>
+<ul>
+<li><code>numbers.foldRight(0) { (m: Int, n: Int) =&gt; println(&quot;m: &quot; + m + &quot; n: &quot; + n); m + n }</code></li>
+</ul>
+</li>
+<li><p>flatten: 将嵌套结构扁平化为一个层次的集合</p>
+<ul>
+<li><code>List(List(1, 2), List(3, 4)).flatten</code> 返回List(1,2,3,4)</li>
+</ul>
+</li>
+<li><p>flatMap: 一个常用的组合子, 结合映射map和flatten. 需要一个处理嵌套列表的函数, 将结果串联起来, 可以看做是先扁平化在映射的快捷操作</p>
+<ul>
+<li><code>val nestedNumbers = List(List(1, 2), List(3, 4))</code></li>
+<li><code>nestedNumbers.flatMap(x =&gt; x.map(_ * 2))</code></li>
+<li>或者先映射在扁平化处理 <code>nestedNumbers.map((x: List[Int]) =&gt; x.map(_ * 2)).flatten</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="u6269_u5C55_u51FD_u6570_u7EC4_u5408_u5B50"><a href="#u6269_u5C55_u51FD_u6570_u7EC4_u5408_u5B50" class="headerlink" title="扩展函数组合子"></a>扩展函数组合子</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ourMap</span>(</span>numbers: <span class="type">List</span>[<span class="type">Int</span>], fn: <span class="type">Int</span> =&gt; <span class="type">Int</span>): <span class="type">List</span>[<span class="type">Int</span>] = &#123;</span><br><span class="line">  numbers.foldRight(<span class="type">List</span>[<span class="type">Int</span>]()) &#123; (x: <span class="type">Int</span>, xs:<span class="type">List</span>[<span class="type">Int</span>]) =&gt;</span><br><span class="line">    fn(x) :: xs</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timesTwo</span>(</span>x: <span class="type">Int</span>) = x * <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ourMap(numbers, timesTwo(_))</span><br><span class="line">ourMap(numbers, timesTwo)</span><br></pre></td></tr></table></figure>
+<h4 id="Map_3F"><a href="#Map_3F" class="headerlink" title="Map?"></a>Map?</h4><ul>
+<li>所有展示的函数组合子都可以在Map上使用. Map可以被看作是一个二元组的列表, 所以你写的函数要处理一个键和值的二元组.</li>
+<li><code>val extensions = Map(&quot;steve&quot; -&gt; 100, &quot;bob&quot; -&gt; 101, &quot;joe&quot; -&gt; 201)</code></li>
+<li><code>extensions.filter((namePhone: (String, Int)) =&gt; namePhone._2 &lt; 200)</code></li>
+<li>使用模式匹配 <code>extensions.filter({case (name, extension) =&gt; extension &lt; 200})</code></li>
+</ul>
+<h4 id="u51FD_u6570_u7EC4_u5408"><a href="#u51FD_u6570_u7EC4_u5408" class="headerlink" title="函数组合"></a>函数组合</h4><ul>
+<li><p>compose 组合其他函数形成一个新的函数f(g(x))</p>
+<ul>
+<li><code>val fComposeG = f _ compose g _</code></li>
+<li>fComposeG(“panqd”) 返回 f(g(panqd))</li>
+</ul>
+</li>
+<li><p>andThen:</p>
+<ul>
+<li>和compose很像, 但是调用顺序是先调用第一个函数, 在调用第二个函数</li>
+<li><code>val fAndThenG = f _ andThen g _</code></li>
+<li>fAndThenG = g(f(panqd))</li>
+</ul>
+</li>
+</ul>
+<h4 id="u67EF_u91CC_u5316_VS__u504F_u5E94_u7528"><a href="#u67EF_u91CC_u5316_VS__u504F_u5E94_u7528" class="headerlink" title="柯里化 VS 偏应用"></a>柯里化 VS 偏应用</h4><ul>
+<li>case语句是一个名为PartialFunction的函数的子类</li>
+<li><p>多个case语句的集合是共同组合在一起的多个PartialFunction(偏函数)</p>
+</li>
+<li><p>理解偏函数</p>
+<ul>
+<li>对于给定的输入类型, 函数可接受该类型的任何值. 一个Int =&gt; String的函数可以接受任意的int的值, 并返回一个字符串.</li>
+<li>对于给定的输入类型, 偏函数只能接受该类型的某些特定的值. 一个Int =&gt; String的偏函数可能不能接受所有的int的值为输入.</li>
+<li>偏函数和部分函数应用无关</li>
+<li><code>val one: PartialFunction[Int, String] = { case 1 =&gt; &quot;one&quot; }</code></li>
+<li><code>one.isDefinedAt(1) 返回true</code></li>
+<li><code>one.isDefinedAt(2) 返回false</code></li>
+<li>偏函数可以使用orElse组成新的函数, 得到的偏函数反应了是否对给定的参数进行了定义<ul>
+<li><code>val wildcard: PartialFunction[Int, String] = { case _ =&gt; &quot;something else&quot; }</code></li>
+<li><code>val p = one orElse two orElse three orElse wildcard</code> <code>p(5)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Scala_u4E2D_u7684_u7C7B_u578B"><a href="#Scala_u4E2D_u7684_u7C7B_u578B" class="headerlink" title="Scala中的类型"></a>Scala中的类型</h4><ul>
+<li>参数化多态性(简单的说就是泛型编程)<ul>
+<li><code>2 :: 1 :: &quot;bar&quot; :: &quot;foo&quot; :: Nil</code> 创建一个List</li>
+<li><code>head</code> 返回Any类型, 即已经无法得知原来的类型</li>
+<li><code>def drop1[A](l: List[A]) = l.tail</code></li>
+</ul>
+</li>
+<li>局部类型推断<ul>
+<li><code>def id[T](x: T) = x</code></li>
+<li><code>val x = id(322)</code></li>
+<li><code>val x = id(&quot;hey&quot;)</code></li>
+<li><code>val x = id(Array(1,2,3,4))</code></li>
+<li>协变, 逆变, 不变, 边界, 量化</li>
+</ul>
+</li>
+<li>存在量化</li>
+<li>视窗</li>
+</ul>
+<h4 id="u9AD8_u7EA7_u96C6_u5408"><a href="#u9AD8_u7EA7_u96C6_u5408" class="headerlink" title="高级集合"></a>高级集合</h4><ul>
+<li>List 标准的链表</li>
+<li>Set 集合没有重复</li>
+<li>Seq 有一个给定的序列</li>
+<li>Map 键值对的映射容器</li>
+</ul>
+<h4 id="u5C42_u6B21_u7ED3_u6784_2C__u4E0B_u9762_u4ECB_u7ECD_u7684_u90FD_u662F_u7279_u8D28_2C__u5728_u53EF_u53D8_u548C_u4E0D_u53EF_u53D8_u5305_u4E2D_u90FD_u6709_u5B9E_u73B0"><a href="#u5C42_u6B21_u7ED3_u6784_2C__u4E0B_u9762_u4ECB_u7ECD_u7684_u90FD_u662F_u7279_u8D28_2C__u5728_u53EF_u53D8_u548C_u4E0D_u53EF_u53D8_u5305_u4E2D_u90FD_u6709_u5B9E_u73B0" class="headerlink" title="层次结构, 下面介绍的都是特质, 在可变和不可变包中都有实现"></a>层次结构, 下面介绍的都是特质, 在可变和不可变包中都有实现</h4><ul>
+<li>Traversable: 均可被遍历, 这个特质定义了标准的函数组合子, 根据foreach来写</li>
+<li>Iterable: iterator()方法返回一个Iterator来迭代元素</li>
+<li>Seq:</li>
+<li>Set:</li>
+<li>Map:</li>
+</ul>
+<h4 id="u65B9_u6CD5_3A"><a href="#u65B9_u6CD5_3A" class="headerlink" title="方法:"></a>方法:</h4><ul>
+<li><p>Traversable:</p>
+<ul>
+<li>def head : A 获取第一个元素</li>
+<li>def tail : Traversable[A] 获取除第一个元素外的集合</li>
+<li>def map [B] (f: (A) =&gt; B) : CC[B] 返回每个元素都被f转化的集合</li>
+<li>def foreach [X] (f: Elem =&gt; X): Unit 在每个元素上执行f</li>
+<li>def find (p: (A) =&gt; Boolean) : Option[A] 返回匹配的第一个元素</li>
+<li>def filter (p: (A) =&gt; Boolean) : Traversable[A] 过滤出符合谓词函数的元素</li>
+<li>def partition (p: (A) ⇒ Boolean) : (Traversable[A], Traversable[A]) 根据谓词函数划分集合</li>
+<li><p>def groupBy [K] (f: (A) =&gt; K) : Map[K, Traversable[A]] 转换</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">toArray</span> :</span> <span class="type">Array</span>[<span class="type">A</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">toArray</span> [</span><span class="type">B</span> &gt;: <span class="type">A</span>] (<span class="keyword">implicit</span> arg0: <span class="type">ClassManifest</span>[<span class="type">B</span>]) : <span class="type">Array</span>[<span class="type">B</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">toBuffer</span> [</span><span class="type">B</span> &gt;: <span class="type">A</span>] : <span class="type">Buffer</span>[<span class="type">B</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">toIndexedSeq</span> [</span><span class="type">B</span> &gt;: <span class="type">A</span>] : <span class="type">IndexedSeq</span>[<span class="type">B</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">toIterable</span> :</span> <span class="type">Iterable</span>[<span class="type">A</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">toIterator</span> :</span> <span class="type">Iterator</span>[<span class="type">A</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">toList</span> :</span> <span class="type">List</span>[<span class="type">A</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">toMap</span> [</span><span class="type">T</span>, <span class="type">U</span>] (<span class="keyword">implicit</span> ev: &lt;:&lt;[<span class="type">A</span>, (<span class="type">T</span>, <span class="type">U</span>)]) : <span class="type">Map</span>[<span class="type">T</span>, <span class="type">U</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">toSeq</span> :</span> <span class="type">Seq</span>[<span class="type">A</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">toSet</span> [</span><span class="type">B</span> &gt;: <span class="type">A</span>] : <span class="type">Set</span>[<span class="type">B</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">toStream</span> :</span> <span class="type">Stream</span>[<span class="type">A</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">toString</span> (</span>) : <span class="type">String</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">toTraversable</span> :</span> <span class="type">Traversable</span>[<span class="type">A</span>]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Iterable: 添加一个迭代器的访问 <code>def iterator: Iterator[A]</code></p>
+<ul>
+<li>def hasNext(): Boolean</li>
+<li>def next: A</li>
+</ul>
+</li>
+<li><p>Set:</p>
+<ul>
+<li>def contains(key: A): Boolean</li>
+<li>def +(elem: A): Set[A]</li>
+<li>def -(elem: A): Set[A]</li>
+</ul>
+</li>
+<li><p>Map:</p>
+<ul>
+<li>构建方式 <code>Map.empty ++ List((&quot;a&quot;, 1), (&quot;b&quot;, 2), (&quot;c&quot;, 3))</code></li>
+</ul>
+</li>
+<li><p>常用的子类:</p>
+<ul>
+<li>HashSet</li>
+<li>HashMap</li>
+<li>TreeMap</li>
+<li>Vector: <code>IndexedSeq(1, 2, 3)</code></li>
+<li>Range: <code>for (i &lt;- 1 to 3) { println(i) }</code><ul>
+<li><code>(1 to 3).map { i =&gt; i }</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>默认实现:</p>
+<ul>
+<li><code>Iterable(1, 2)</code> <code>res0: Iterable[Int] = List(1, 2)</code></li>
+<li><code>Seq(1, 2)</code> 同上</li>
+<li><code>Set(1, 2)</code> <code>res31: scala.collection.immutable.Set[Int] = Set(1, 2)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="u53EF_u53D8_u96C6_u5408"><a href="#u53EF_u53D8_u96C6_u5408" class="headerlink" title="可变集合"></a>可变集合</h3><ul>
+<li>collection.mutable.Map<ul>
+<li>getOrElseUpdate</li>
+<li>+=</li>
+</ul>
+</li>
+<li>ListBuffer和ArrayBuffer</li>
+<li>LinkedList and DoubleLinkedList</li>
+<li>PriorityQueue</li>
+<li>Stack 和 ArrayStack</li>
+<li>StringBuilder 有趣的是，StringBuilder的是一个集合</li>
+</ul>
+<h4 id="u4E0Ejava_u7684_u751F_u6D3B"><a href="#u4E0Ejava_u7684_u751F_u6D3B" class="headerlink" title="与java的生活"></a>与java的生活</h4><ul>
+<li><p>通过<strong>JavaConverters package</strong>轻松地在Java和Scala的集合类型之间转换</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scala.collection.<span class="type">JavaConverters</span>._</span><br><span class="line">  <span class="keyword">val</span> sl = <span class="keyword">new</span> scala.collection.mutable.<span class="type">ListBuffer</span>[<span class="type">Int</span>]</span><br><span class="line">  <span class="keyword">val</span> jl : java.util.<span class="type">List</span>[<span class="type">Int</span>] = sl.asJava</span><br><span class="line">  <span class="keyword">val</span> sl2 : scala.collection.mutable.<span class="type">Buffer</span>[<span class="type">Int</span>] = jl.asScala</span><br><span class="line">  assert(sl eq sl2)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>双向转换</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">scala.collection.<span class="type">Iterable</span> &lt;=&gt; java.lang.<span class="type">Iterable</span></span><br><span class="line">scala.collection.<span class="type">Iterable</span> &lt;=&gt; java.util.<span class="type">Collection</span></span><br><span class="line">scala.collection.<span class="type">Iterator</span> &lt;=&gt; java.util.&#123; <span class="type">Iterator</span>, <span class="type">Enumeration</span> &#125;</span><br><span class="line">scala.collection.mutable.<span class="type">Buffer</span> &lt;=&gt; java.util.<span class="type">List</span></span><br><span class="line">scala.collection.mutable.<span class="type">Set</span> &lt;=&gt; java.util.<span class="type">Set</span></span><br><span class="line">scala.collection.mutable.<span class="type">Map</span> &lt;=&gt; java.util.&#123; <span class="type">Map</span>, <span class="type">Dictionary</span> &#125;</span><br><span class="line">scala.collection.mutable.<span class="type">ConcurrentMap</span> &lt;=&gt; java.util.concurrent.<span class="type">ConcurrentMap</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>单向转换</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scala.collection.<span class="type">Seq</span> =&gt; java.util.<span class="type">List</span></span><br><span class="line">scala.collection.mutable.<span class="type">Seq</span> =&gt; java.util.<span class="type">List</span></span><br><span class="line">scala.collection.<span class="type">Set</span> =&gt; java.util.<span class="type">Set</span></span><br><span class="line">scala.collection.<span class="type">Map</span> =&gt; java.util.<span class="type">Map</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/13/Akka/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Scala-Akka
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/24/Redis/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Redis</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Scala-Language" data-title="Scala-Language" data-url="http://yoursite.com/2015/09/12/Scala-Language/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"KingDomPan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 KingDomPan
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>ReactRouter | KingDomPan&#39;s Secret Garden</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="内置对象
+import { Router, Route, Link, IndexRoute, Redirect } from &amp;#39;react-router&amp;#39;;
+import { createHistory, createHashHistory, useBasename } from &amp;#39;history&amp;#39;;
+Route
+onEnter回调, 渲染对象的组件前进行拦截操作,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReactRouter">
+<meta property="og:url" content="http://yoursite.com/2015/12/04/ReactRouter/index.html">
+<meta property="og:site_name" content="KingDomPan's Secret Garden">
+<meta property="og:description" content="内置对象
+import { Router, Route, Link, IndexRoute, Redirect } from &amp;#39;react-router&amp;#39;;
+import { createHistory, createHashHistory, useBasename } from &amp;#39;history&amp;#39;;
+Route
+onEnter回调, 渲染对象的组件前进行拦截操作,">
+<meta property="og:image" content="http://yoursite.com/images/ReactRouter/1451466274435.png">
+<meta property="og:image" content="http://yoursite.com/images/ReactRouter/1451466377835.png">
+<meta property="og:image" content="http://yoursite.com/images/ReactRouter/1451466588319.png">
+<meta property="og:image" content="http://yoursite.com/images/ReactRouter/1451466653355.png">
+<meta property="og:updated_time" content="2016-02-04T05:33:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ReactRouter">
+<meta name="twitter:description" content="内置对象
+import { Router, Route, Link, IndexRoute, Redirect } from &amp;#39;react-router&amp;#39;;
+import { createHistory, createHashHistory, useBasename } from &amp;#39;history&amp;#39;;
+Route
+onEnter回调, 渲染对象的组件前进行拦截操作,">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">KingDomPan</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">半吊子的Web工程师</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">真的我</a></li>
+				        
+							<li><a href="/read">读书</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/KingDomPan" title="github">github</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/Akka/" style="font-size: 10px;">Akka</a> <a href="/tags/Data/" style="font-size: 16.67px;">Data</a> <a href="/tags/Fetch/" style="font-size: 10px;">Fetch</a> <a href="/tags/Fiddler/" style="font-size: 10px;">Fiddler</a> <a href="/tags/Finagle/" style="font-size: 10px;">Finagle</a> <a href="/tags/GC/" style="font-size: 10px;">GC</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/JRebel/" style="font-size: 10px;">JRebel</a> <a href="/tags/JS/" style="font-size: 13.33px;">JS</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Jpa/" style="font-size: 16.67px;">Jpa</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/N-1/" style="font-size: 10px;">N + 1</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/ReactJs/" style="font-size: 13.33px;">ReactJs</a> <a href="/tags/ReactRouter/" style="font-size: 10px;">ReactRouter</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Scala/" style="font-size: 16.67px;">Scala</a> <a href="/tags/Seesion/" style="font-size: 10px;">Seesion</a> <a href="/tags/Spring/" style="font-size: 20px;">Spring</a> <a href="/tags/Spring-Security-安全验证/" style="font-size: 10px;">Spring Security 安全验证</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/缓存/" style="font-size: 13.33px;">缓存</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">半吊子的Web工程师</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">KingDomPan</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="null" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">KingDomPan</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">半吊子的Web工程师</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">真的我</a></li>
+		        
+					<li><a href="/read">读书</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/KingDomPan" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-ReactRouter" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/04/ReactRouter/" class="article-date">
+  	<time datetime="2015-12-04T05:14:53.000Z" itemprop="datePublished">2015-12-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ReactRouter
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactJs/">ReactJs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactRouter/">ReactRouter</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="u5185_u7F6E_u5BF9_u8C61"><a href="#u5185_u7F6E_u5BF9_u8C61" class="headerlink" title="内置对象"></a>内置对象</h5><ul>
+<li><code>import { Router, Route, Link, IndexRoute, Redirect } from &#39;react-router&#39;;</code></li>
+<li><code>import { createHistory, createHashHistory, useBasename } from &#39;history&#39;;</code></li>
+<li>Route<ul>
+<li>onEnter回调, 渲染对象的组件前进行拦截操作, 比如权限验证, <strong>异步验证需要需要第三个参数callback</strong></li>
+<li>onUpdate回调</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h5 id="u6700_u4F73_u5B9E_u8DF5_u70B9"><a href="#u6700_u4F73_u5B9E_u8DF5_u70B9" class="headerlink" title="最佳实践点"></a>最佳实践点</h5><ul>
+<li>路由组件对象的属性props会被注入location, history对象, <strong>history</strong>对象即为浏览器的HTML5History对象, 这些对象在<code>RoutingContext.js</code>执行</li>
+<li><code>location</code>代表一个URL, 每个URL都会有state对象存放数据, 但是state的对象数据不会出现在URL上, 事实上数据会存在sessionStorage中</li>
+<li>在路由组件的子组件中, 可以使用context的api来获取location和history对象, <code>this.context.history</code>和<code>this.context.location</code></li>
+<li><code>&lt;Link to={path} state={null} /&gt;</code> == <code>history.pushState(null, path)</code></li>
+<li><code>&lt;Redirect from={currentPath} to={nextPath} /&gt;</code> == <code>history.replaceState(null, nextPath)</code></li>
+<li>React和React-Router的UI重绘, <strong>主要URL保持一致, 返回的UI总是一定的</strong></li>
+<li>路径参数<code>params消息</code>, <code>this.props.params.id</code></li>
+<li>其他参数<code>location对象</code>, <code>this.props.location.query</code><br><img src="/images/ReactRouter/1451466274435.png" alt="Component 2 Router"></li>
+<li>点击<code>浏览器按钮</code>和<code>Link</code>组件的机制<br><img src="/images/ReactRouter/1451466377835.png" alt="重绘机制"></li>
+<li>location结构<br><img src="/images/ReactRouter/1451466588319.png" alt="Location"></li>
+<li><p>state结构<br><img src="/images/ReactRouter/1451466653355.png" alt="State"></p>
+</li>
+<li><p>点击Link后的操作</p>
+<ol>
+<li>Link最终会生成<code>a</code>标签, <code>to</code> <code>query</code> <code>hash</code>属性会被渲染成href属性</li>
+<li>内部使用脚本拦截了浏览器的默认行为</li>
+<li>调用history.pushState方法(<code>history</code>包里面的<code>create*History</code>方法创建的对象)</li>
+<li>history包中的pushState支持传入state和path, 函数内部将2个参数传递到<code>createLocation</code>中, 返回Location对象</li>
+<li>系统将上述Location对象作为参数传递到TransitionTo方法中, 调用window.location.hash或者<code>window.history.pushState</code>修改应用的URL, 同时触发<code>history.listeners</code>中注册的监听器</li>
+<li><code>matchRoutes</code>方法会匹配出Route组件树中与当前<code>location</code>对象最匹配的一个, 并返回<code>nextState</code>对象</li>
+<li>在Router组件的<code>componentWillMount</code>生命周期方法中调用<code>history.listen(listener)</code>方法, 传入nextState对象</li>
+<li>执行<code>this.setState(nextState);</code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这是一段登录组件的代码</span></span><br><span class="line"><span class="keyword">const</span> location = <span class="keyword">this</span>.props.location;</span><br><span class="line"><span class="comment">// 在登录前访问其他URL, 将被重定向到登录组件, location的对象中存在着上一个地址的信息, 在登录成功后可以从这里取出信息, 进行访问页面的定位, 重要的是location的state对象, 这个对象和history里面的state一样, 存放着字典数据</span></span><br><span class="line"><span class="keyword">if</span> (location.state &amp;&amp; location.state.nextPathname) &#123;</span><br><span class="line">  <span class="keyword">this</span>.props.history.replaceState(<span class="literal">null</span>, location.state.nextPathname);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// 如果是直接访问登录界面, 登录成功后默认跳转到/about</span></span><br><span class="line">  <span class="keyword">this</span>.props.history.replaceState(<span class="literal">null</span>, <span class="string">'/about'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 重定向组件 from to</span></span><br><span class="line">&lt;Redirect from=<span class="string">"/archives"</span> to=<span class="string">"/archives/posts"</span>/&gt;</span><br><span class="line"><span class="comment">// 重定向后的处理策略, 采用多重子组件渲染的方式</span></span><br><span class="line">&lt;Route onEnter=&#123;requireAuth&#125; path=<span class="string">"archives"</span> component=&#123;Archives&#125;&gt;</span><br><span class="line">  <span class="comment">// 使用 components 声明路由所对应的多个组件</span></span><br><span class="line">  &lt;Route path=<span class="string">"posts"</span> components=&#123;&#123;</span><br><span class="line">    original: Original, <span class="comment">// 成为上级组件的一个属性</span></span><br><span class="line">    reproduce: Reproduce, <span class="comment">// 成为上级组件的一个属性</span></span><br><span class="line">  &#125;&#125;/&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="title">Route</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// 权限验证, 如果没验证通过, 那么跳转到登录页, 这边的参数即为上段代码里面出现的参数</span><br><span class="line">function requireAuth(nextState, replaceState) &#123;</span><br><span class="line">  if (!hasLogin()) &#123;</span><br><span class="line">    // 改方法和Redirect组件类似, 不会在浏览器中留下重定向前的历史</span><br><span class="line">    replaceState(&#123;</span><br><span class="line">      // 实际上是/archives/posts</span><br><span class="line">    nextPathname: nextState.location.pathname</span><br><span class="line">  &#125;,'/signIn');</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<h5 id="u8DEF_u7531_u751F_u547D_u5468_u671F"><a href="#u8DEF_u7531_u751F_u547D_u5468_u671F" class="headerlink" title="路由生命周期"></a>路由生命周期</h5><ul>
+<li><p>假设存在以下的路由配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;Route path=<span class="string">"/"</span> component=&#123;App&#125;&gt;</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="title">IndexRoute</span> <span class="attribute">component</span>=<span class="value">&#123;Home&#125;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">Route</span> <span class="attribute">path</span>=<span class="value">"invoices/:invoiceId"</span> <span class="attribute">component</span>=<span class="value">&#123;Invoice&#125;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">Route</span> <span class="attribute">path</span>=<span class="value">"accounts/:accountId"</span> <span class="attribute">component</span>=<span class="value">&#123;Account&#125;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">Route</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>打开&#39;/&#39;</code><br>| 组件       |  生命周期|<br>| :——-  | ——:  |<br>| App    |  componentDidMount  |<br>| Home    |  componentDidMount  |<br>| Invoice    |  N/A  |<br>| Account    |  N/A  |</p>
+</li>
+<li><p><code>当用户从 &#39;/&#39; 跳转到 &#39;/invoice/123&#39;</code></p>
+<ul>
+<li><code>app</code>从<code>router</code>接收到新的props(<code>children</code>, <code>params</code>, <code>location</code>等), 所以触发了<code>cwrp</code>, <code>cdu</code></li>
+<li><code>Home</code>不被渲染, 所以被卸载, 触发<code>cwu</code></li>
+<li><code>Invoice</code>首次被挂载<br>| 组件       |  生命周期|<br>| :——-  | ——:  |<br>| App    |  componentWillReceiveProps, componentDidUpdate  |<br>| Home    |  componentWillUnmount  |<br>| Invoice    |  componentDidMount  |<br>| Account    |  N/A  |</li>
+</ul>
+</li>
+<li><p><code>当用户从 /invoice/123 跳转到 /invoice/789</code></p>
+<ul>
+<li>所有的组件之前都已经被挂载, 所以只是从<code>router</code>更新了<code>props</code><br>| 组件       |  生命周期|<br>| :——-  | ——:  |<br>| App    |  componentWillReceiveProps, componentDidUpdate  |<br>| Home    |  N/A  |<br>| Invoice    |  componentWillReceiveProps, componentDidUpdate  |<br>| Account    |  N/A  |</li>
+</ul>
+</li>
+<li><p><code>当从 /invoice/789 跳转到 /accounts/123</code><br>| 组件       |  生命周期|<br>| :——-  | ——:  |<br>| App    |  componentWillReceiveProps, componentDidUpdate  |<br>| Home    |  N/A  |<br>| Invoice    |  componentWillUnmount  |<br>| Account    |  componentDidMount  |</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/04/ReactReflux/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          ReactReflux
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/02/ReactJsLifecycle/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ReactJs生命周期</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ReactRouter" data-title="ReactRouter" data-url="http://yoursite.com/2015/12/04/ReactRouter/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"KingDomPan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 KingDomPan
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

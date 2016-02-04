@@ -39,7 +39,7 @@
 		</hgroup>
 
 		
-		<p class="header-subtitle">左手前端, 右手后端, 我, 全栈了!</p>
+		<p class="header-subtitle">半吊子的Web工程师</p>
 		
 
 		
@@ -105,7 +105,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/Data/" style="font-size: 16.67px;">Data</a> <a href="/tags/Fetch/" style="font-size: 10px;">Fetch</a> <a href="/tags/Fiddler/" style="font-size: 10px;">Fiddler</a> <a href="/tags/GC/" style="font-size: 10px;">GC</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/JRebel/" style="font-size: 10px;">JRebel</a> <a href="/tags/JS/" style="font-size: 13.33px;">JS</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Jpa/" style="font-size: 16.67px;">Jpa</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/N-1/" style="font-size: 10px;">N + 1</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/ReactJs/" style="font-size: 10px;">ReactJs</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Seesion/" style="font-size: 10px;">Seesion</a> <a href="/tags/Spring/" style="font-size: 20px;">Spring</a> <a href="/tags/Spring-Security-安全验证/" style="font-size: 10px;">Spring Security 安全验证</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/缓存/" style="font-size: 13.33px;">缓存</a>
+						<a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/Akka/" style="font-size: 10px;">Akka</a> <a href="/tags/Data/" style="font-size: 16.67px;">Data</a> <a href="/tags/Fetch/" style="font-size: 10px;">Fetch</a> <a href="/tags/Fiddler/" style="font-size: 10px;">Fiddler</a> <a href="/tags/Finagle/" style="font-size: 10px;">Finagle</a> <a href="/tags/GC/" style="font-size: 10px;">GC</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/JRebel/" style="font-size: 10px;">JRebel</a> <a href="/tags/JS/" style="font-size: 13.33px;">JS</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Jpa/" style="font-size: 16.67px;">Jpa</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/N-1/" style="font-size: 10px;">N + 1</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/ReactJs/" style="font-size: 13.33px;">ReactJs</a> <a href="/tags/ReactRouter/" style="font-size: 10px;">ReactRouter</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Scala/" style="font-size: 16.67px;">Scala</a> <a href="/tags/Seesion/" style="font-size: 10px;">Seesion</a> <a href="/tags/Spring/" style="font-size: 20px;">Spring</a> <a href="/tags/Spring-Security-安全验证/" style="font-size: 10px;">Spring Security 安全验证</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/缓存/" style="font-size: 13.33px;">缓存</a>
 					</div>
 				</section>
 				
@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part3">
 				
-					<div id="js-aboutme">左手前端, 右手后端, 我, 全栈了!</div>
+					<div id="js-aboutme">半吊子的Web工程师</div>
 				</section>
 				
 			</div>
@@ -142,7 +142,7 @@
 			  <h1 class="header-author">KingDomPan</h1>
 			</hgroup>
 			
-			<p class="header-subtitle">左手前端, 右手后端, 我, 全栈了!</p>
+			<p class="header-subtitle">半吊子的Web工程师</p>
 			
 			<nav class="header-menu">
 				<ul>
@@ -170,6 +170,130 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-ReactReflux" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/04/ReactReflux/" class="article-date">
+  	<time datetime="2016-02-04T05:28:51.000Z" itemprop="datePublished">2016-02-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/04/ReactReflux/">ReactReflux</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Reflux"><a href="#Reflux" class="headerlink" title="Reflux"></a>Reflux</h4><p>Reflux是根据React的flux创建的单向数据流类库, Reflux的单向数据流模式主要由actions和stores组成. 例如, 当组件list新增item时, 会调用actions的某个方法(如addItem(data)), 并将新的数据当参数传递进去, 通过事件机制, 数据会传递到stores中, stores可以向服务器发起请求, 并更新数据数据库. 数据更新成功后, 还是通过事件机制传递的组件list当中, 并更新ui.<br><img src="/images/ReactJs/reflux.png" alt="Flux Dispatcher"></p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/02/04/ReactReflux/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-ReactRouter" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/04/ReactRouter/" class="article-date">
+  	<time datetime="2015-12-04T05:14:53.000Z" itemprop="datePublished">2015-12-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/04/ReactRouter/">ReactRouter</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="u5185_u7F6E_u5BF9_u8C61"><a href="#u5185_u7F6E_u5BF9_u8C61" class="headerlink" title="内置对象"></a>内置对象</h5><ul>
+<li><code>import { Router, Route, Link, IndexRoute, Redirect } from &#39;react-router&#39;;</code></li>
+<li><code>import { createHistory, createHashHistory, useBasename } from &#39;history&#39;;</code></li>
+<li>Route<ul>
+<li>onEnter回调, 渲染对象的组件前进行拦截操作, 比如权限验证, <strong>异步验证需要需要第三个参数callback</strong></li>
+<li>onUpdate回调</li>
+</ul>
+</li>
+</ul>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactJs/">ReactJs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactRouter/">ReactRouter</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/12/04/ReactRouter/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-ReactJsLifecycle" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -284,6 +408,220 @@
       
         <p class="article-more-link">
           <a  href="/2015/11/12/PromiseFetch/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Finagle" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/14/Finagle/" class="article-date">
+  	<time datetime="2015-09-14T13:23:32.000Z" itemprop="datePublished">2015-09-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/14/Finagle/">Scala-Finagle</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="u57FA_u672C_u63CF_u8FF0"><a href="#u57FA_u672C_u63CF_u8FF0" class="headerlink" title="基本描述"></a>基本描述</h4><ul>
+<li>基于RPC, 多协议支持, 运行在JVM上, 统一api构建服务端和客户端</li>
+<li>并发模型基于Futures, 安全的模块化编程</li>
+<li>服务端和客户端都发布监控和统计信息</li>
+</ul>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Finagle/">Finagle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/">Scala</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/09/14/Finagle/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Akka" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/13/Akka/" class="article-date">
+  	<time datetime="2015-09-13T15:54:23.000Z" itemprop="datePublished">2015-09-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/13/Akka/">Scala-Akka</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Actor_u662F_u4EC0_u4E48"><a href="#Actor_u662F_u4EC0_u4E48" class="headerlink" title="Actor是什么"></a>Actor是什么</h4><ul>
+<li>Actor引用: actor是以引用的方式暴露给外界的, 内部状态需要被隔离才能Actor模式中获益</li>
+<li>一个Actor是一个容器, 包含了状态, 行为, 邮箱, 子Actor, 监管策略<ul>
+<li>状态: 包含一些变量来反应当前所处的状态, 这些数据是有价值的, 必须被保护起来, 状态不一致是致命的</li>
+<li>行为: 每次当一个消息被处理时, 消息会与actor的当前的行为进行匹配. 行为是一个函数, 定义了当前消息所要采取的动作</li>
+<li>邮箱: 用来处理消息, 消息是从其他actor发送过来的, 每个actor仅有一个邮箱, 默认按照FIFO处理</li>
+<li>子Actor: 每个actor都是一个潜在的监管者, 如果创建子Actor来委托处理任务, 那么默认就会自动监管他们. 子actor维护在actor的上下文中, actor可以访问, 对列表的更改是通过context.actorOf()或者停止context.stop()来实现的, 并且这些更改会立刻生效. 实际的操作是在幕后异步方式完成.</li>
+<li>监管策略: 用来处理其子actor错误状况的机制, 错误处理由Akka透明进行, 策略是actor系统组织结构的基础, 所以actor一旦被创建就无法修改</li>
+<li>当actor停止时, 失败了并且不能用重启来解决, 停止它自己或者被监管者停止, 它会释放它的资源, 将它邮箱中所有未处理的消息放进系统的”死信邮箱”</li>
+</ul>
+</li>
+</ul>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Akka/">Akka</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/">Scala</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/09/13/Akka/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Scala-Language" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/12/Scala-Language/" class="article-date">
+  	<time datetime="2015-09-12T03:21:10.000Z" itemprop="datePublished">2015-09-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/12/Scala-Language/">Scala-Language</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="u57FA_u672C_u6570_u636E_u7ED3_u6784"><a href="#u57FA_u672C_u6570_u636E_u7ED3_u6784" class="headerlink" title="基本数据结构"></a>基本数据结构</h4><ul>
+<li>列表List <code>val numbers = List(1, 2, 3, 4)</code></li>
+<li>集合Set <code>Set(1, 1, 2)</code></li>
+<li>元组Tuple <code>val hostPort = (&quot;localhost&quot;, 80)</code><ul>
+<li>元组的取值 <code>hostPort._1</code></li>
+<li>元组的特殊语法创建 <code>1 -&gt; 2</code></li>
+</ul>
+</li>
+<li>映射Map <code>Map(1 -&gt; 2)</code> <code>Map(1 -&gt; &quot;one&quot;, 2 -&gt; &quot;two&quot;)</code></li>
+<li>选项Option: 表示一个有可能包含值的容器<ul>
+<li>Some</li>
+<li>None</li>
+<li>List.get返回的是Option类型, Option本身是泛型的</li>
+</ul>
+</li>
+</ul>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/">Scala</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程语言/">编程语言</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/09/12/Scala-Language/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -497,337 +835,6 @@
       
         <p class="article-more-link">
           <a  href="/2015/07/22/jvm-gc/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-js" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/12/28/js/" class="article-date">
-  	<time datetime="2014-12-28T09:21:14.000Z" itemprop="datePublished">2014-12-28</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/12/28/js/">悟透Javascript</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前几日, 闲来无事, 阅读了下&lt;悟透Javascript&gt;这本书, 顺手记下了一些简单的在理解范围内的知识点.</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Javascript/">Javascript</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2014/12/28/js/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-HotReboot" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/12/14/HotReboot/" class="article-date">
-  	<time datetime="2014-12-14T07:23:36.000Z" itemprop="datePublished">2014-12-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/12/14/HotReboot/">JRebel-告诉你什么是真正的热部署</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>以前每次修改java代码时, 或者修改了Spring, Struts2之类的配置文件时,  都需要重启JAVA Web容器,<br>才能使修改后的代码或者配置生效,  Tomcat或者Jetty都是如此,  在使用Weblogic的时候就算修改了weblogic.xml也是没效果,  查找了很多资料,  都是千篇一律的.</p>
-<p>前几天调试OOPS-即时通信模块的api接口时, 要经常修改java代码来调试, 结果就是简简单单的2个接口,  由于不停的修改, 启动, 搞了一个下午, 快崩溃了.  这实在不是我们该干的事啊.</p>
-<p>后来谷歌了一下, 不小心就搜索到了JRebel这个东西, 实在是码农的福音啊. 不说了, 两步教你怎么配置.</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JRebel/">JRebel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/">Maven</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/JRebel/">JRebel</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2014/12/14/HotReboot/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Spring-Data-Jpa-2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/12/11/Spring-Data-Jpa-2/" class="article-date">
-  	<time datetime="2014-12-11T02:42:56.000Z" itemprop="datePublished">2014-12-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/12/11/Spring-Data-Jpa-2/">Spring-Data-Jpa-MVC</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这节讲解一下SpringMVC和SpringDataJpa的一点关系, 主要是DomainClass的自动注入和方法<strong>分页排序</strong>参数的自动解析.</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data/">Data</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jpa/">Jpa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Spring-Data/">Spring-Data</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2014/12/11/Spring-Data-Jpa-2/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Spring-Data-Jpa-1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/12/11/Spring-Data-Jpa-1/" class="article-date">
-  	<time datetime="2014-12-11T01:05:35.000Z" itemprop="datePublished">2014-12-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/12/11/Spring-Data-Jpa-1/">Spring-Data-Jpa-基础概括</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前些天对Spring-Data-Jpa的基础知识做了点扫盲, 现在随手记录下, 主要是一些关键点.<br>具体的可以查看官网<a href="http://docs.spring.io/spring-data/jpa/docs/1.7.1.RELEASE/reference/html/">Spring-Data-Jpa</a></p>
-<h4 id="Spring-Data-Jpa_u63A5_u53E3"><a href="#Spring-Data-Jpa_u63A5_u53E3" class="headerlink" title="Spring-Data-Jpa接口"></a>Spring-Data-Jpa接口</h4><ul>
-<li>Repository : 最顶层的空接口, 统一所有的 Repository 类型</li>
-<li>CrudRepository : Repository 的子接口, 提供 CRDU 的功能</li>
-<li>PagingAndSortingRepository : CrudRepository 的子接口, 添加分页和排序功能</li>
-<li>JpaRepository : PagingAndSortingRepository 的子接口, 增加一些实用的功能, 如批量操作</li>
-<li>JpaSpecificationExecutor : 用来做负责查询的接口</li>
-<li>Specification : 查询规范, 要做复杂的查询, 只需围绕这个规范来设置查询条件即可</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data/">Data</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jpa/">Jpa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Spring-Data/">Spring-Data</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2014/12/11/Spring-Data-Jpa-1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Fiddler" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/12/09/Fiddler/" class="article-date">
-  	<time datetime="2014-12-09T11:04:06.000Z" itemprop="datePublished">2014-12-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/12/09/Fiddler/">基于Fiddler的前端调试技术</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文是我在浙江现场出差的时候, E周E文给现场的兄弟们讲解开发技术<br>草拟的讲义, 文后奉上了录制视频, 主要讲解JAVA WEB开发的知识, 并<br>重点通过Fiddler这个前台调试神器现场演示了作用.</p>
-<p><strong>视频地址</strong> <a href="http://pan.baidu.com/s/1gdkXFtp">怒点我</a></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fiddler/">Fiddler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/HTTP/">HTTP</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2014/12/09/Fiddler/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
