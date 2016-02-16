@@ -197,7 +197,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="V8_u7684_u5BF9_u8C61_u5206_u914D"><a href="#V8_u7684_u5BF9_u8C61_u5206_u914D" class="headerlink" title="V8的对象分配"></a>V8的对象分配</h5><p>在V8引擎中, 64位系统下的限制内存大概是1.5G, 32位下大概是0.7G, 在这样的限制下, NOde无法直接操作大对象内存.<br>此限制来源于当初V8引擎的设计主要是为了浏览器使用, 在浏览器端, 改内存限制已满足使用. <strong>深层次的限制是JS的单线程和V8的垃圾回收机制的限制</strong>.<br>V8的垃圾回收, 一次小的垃圾回收需要50mm以上, 一次非增量式的垃圾回收至少需要1s以上, 会引起线程的暂停执行, 影响应用程序的性能.<br>所有的JS对象都是在堆上进行分配的, <code>process.memoryUsage();</code> 返回<code>已经申请到的堆内存</code>,<code>已经使用的堆内存</code>,<code>进程的常住内存</code>.<br><code>node --max-old-space-size=1700 test.js</code> 单位MB <strong>设置老生代的最大值</strong><br><code>弄得--max-new-space-size=1024 test.js</code> 单位KB <strong>设置新生代内存空间的大小</strong></p>
+        <h5 id="V8_u7684_u5BF9_u8C61_u5206_u914D"><a href="#V8_u7684_u5BF9_u8C61_u5206_u914D" class="headerlink" title="V8的对象分配"></a>V8的对象分配</h5><p>在V8引擎中, 64位系统下的限制内存大概是1.5G, 32位下大概是0.7G, 在这样的限制下, NOde无法直接操作大对象内存.<br>此限制来源于当初V8引擎的设计主要是为了浏览器使用, 在浏览器端, 改内存限制已满足使用. <strong>深层次的限制是JS的单线程和V8的垃圾回收机制的限制</strong>.<br>V8的垃圾回收, 一次小的垃圾回收需要50mm以上, 一次非增量式的垃圾回收至少需要1s以上, 会引起线程的暂停执行, 影响应用程序的性能.<br>所有的JS对象都是在堆上进行分配的, <code>process.memoryUsage();</code> 返回<code>已经申请到的堆内存</code>,<code>已经使用的堆内存</code>,<code>进程的常住内存</code>.<br><code>node --max-old-space-size=1700 test.js</code> 单位MB <strong>设置老生代的最大值</strong><br><code>node --max-new-space-size=1024 test.js</code> 单位KB <strong>设置新生代内存空间的大小</strong></p>
       
     </div>
     
