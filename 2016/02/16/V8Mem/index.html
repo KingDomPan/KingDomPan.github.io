@@ -4,57 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>JAVA虚拟机垃圾回收(GC) | KingDomPan&#39;s Secret Garden</title>
+  <title>V8的垃圾回收机制与内存限制 | KingDomPan&#39;s Secret Garden</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="垃圾回收器常用的算法及实验原理
-
-
-引用计数法
-
-为每一个对象分配一个整型的计数器
-无法处理循环引用的问题
-
-
-标记-清除法(Mark-Sweep)
-
-标记阶段: 标记阶段首先通过根节点, 标记所有从根节点开始的较大对象
-清除阶段: 在清除阶段，清除所有未被标记的对象
-存在大量的内存碎片">
+  <meta name="description" content="V8的对象分配在V8引擎中, 64位系统下的限制内存大概是1.5G, 32位下大概是0.7G, 在这样的限制下, NOde无法直接操作大对象内存.此限制来源于当初V8引擎的设计主要是为了浏览器使用, 在浏览器端, 改内存限制已满足使用. 深层次的限制是JS的单线程和V8的垃圾回收机制的限制.V8的垃圾回收, 一次小的垃圾回收需要50mm以上, 一次非增量式的垃圾回收至少需要1s以上, 会引起线程的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JAVA虚拟机垃圾回收(GC)">
-<meta property="og:url" content="http://yoursite.com/2015/07/22/jvm-gc/index.html">
+<meta property="og:title" content="V8的垃圾回收机制与内存限制">
+<meta property="og:url" content="http://yoursite.com/2016/02/16/V8Mem/index.html">
 <meta property="og:site_name" content="KingDomPan's Secret Garden">
-<meta property="og:description" content="垃圾回收器常用的算法及实验原理
-
-
-引用计数法
-
-为每一个对象分配一个整型的计数器
-无法处理循环引用的问题
-
-
-标记-清除法(Mark-Sweep)
-
-标记阶段: 标记阶段首先通过根节点, 标记所有从根节点开始的较大对象
-清除阶段: 在清除阶段，清除所有未被标记的对象
-存在大量的内存碎片">
-<meta property="og:updated_time" content="2016-02-04T05:27:21.000Z">
+<meta property="og:description" content="V8的对象分配在V8引擎中, 64位系统下的限制内存大概是1.5G, 32位下大概是0.7G, 在这样的限制下, NOde无法直接操作大对象内存.此限制来源于当初V8引擎的设计主要是为了浏览器使用, 在浏览器端, 改内存限制已满足使用. 深层次的限制是JS的单线程和V8的垃圾回收机制的限制.V8的垃圾回收, 一次小的垃圾回收需要50mm以上, 一次非增量式的垃圾回收至少需要1s以上, 会引起线程的">
+<meta property="og:updated_time" content="2016-02-16T03:03:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JAVA虚拟机垃圾回收(GC)">
-<meta name="twitter:description" content="垃圾回收器常用的算法及实验原理
-
-
-引用计数法
-
-为每一个对象分配一个整型的计数器
-无法处理循环引用的问题
-
-
-标记-清除法(Mark-Sweep)
-
-标记阶段: 标记阶段首先通过根节点, 标记所有从根节点开始的较大对象
-清除阶段: 在清除阶段，清除所有未被标记的对象
-存在大量的内存碎片">
+<meta name="twitter:title" content="V8的垃圾回收机制与内存限制">
+<meta name="twitter:description" content="V8的对象分配在V8引擎中, 64位系统下的限制内存大概是1.5G, 32位下大概是0.7G, 在这样的限制下, NOde无法直接操作大对象内存.此限制来源于当初V8引擎的设计主要是为了浏览器使用, 在浏览器端, 改内存限制已满足使用. 深层次的限制是JS的单线程和V8的垃圾回收机制的限制.V8的垃圾回收, 一次小的垃圾回收需要50mm以上, 一次非增量式的垃圾回收至少需要1s以上, 会引起线程的">
   
   
     <link rel="icon" href="/favicon.png">
@@ -209,11 +170,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-jvm-gc" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-V8Mem" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/07/22/jvm-gc/" class="article-date">
-  	<time datetime="2015-07-22T07:12:21.000Z" itemprop="datePublished">2015-07-22</time>
+      <a href="/2016/02/16/V8Mem/" class="article-date">
+  	<time datetime="2016-02-16T03:01:30.000Z" itemprop="datePublished">2016-02-16</time>
 </a>
     </div>
   
@@ -226,7 +187,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      JAVA虚拟机垃圾回收(GC)
+      V8的垃圾回收机制与内存限制
     </h1>
   
 
@@ -235,7 +196,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GC/">GC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nodejs/">Nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/V8/">V8</a></li></ul>
 	</div>
 
         
@@ -246,72 +207,46 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>垃圾回收器常用的算法及实验原理</p>
-</blockquote>
-<ul>
-<li><p>引用计数法</p>
-<ul>
-<li>为每一个对象分配一个整型的计数器</li>
-<li>无法处理循环引用的问题</li>
-</ul>
-</li>
-<li><p>标记-清除法(Mark-Sweep)</p>
-<ul>
-<li>标记阶段: 标记阶段首先通过根节点, 标记所有从根节点开始的较大对象</li>
-<li>清除阶段: 在清除阶段，清除所有未被标记的对象</li>
-<li>存在大量的内存碎片</li>
-</ul>
-</li>
-</ul>
+        <h5 id="V8_u7684_u5BF9_u8C61_u5206_u914D"><a href="#V8_u7684_u5BF9_u8C61_u5206_u914D" class="headerlink" title="V8的对象分配"></a>V8的对象分配</h5><p>在V8引擎中, 64位系统下的限制内存大概是1.5G, 32位下大概是0.7G, 在这样的限制下, NOde无法直接操作大对象内存.<br>此限制来源于当初V8引擎的设计主要是为了浏览器使用, 在浏览器端, 改内存限制已满足使用. <strong>深层次的限制是JS的单线程和V8的垃圾回收机制的限制</strong>.<br>V8的垃圾回收, 一次小的垃圾回收需要50mm以上, 一次非增量式的垃圾回收至少需要1s以上, 会引起线程的暂停执行, 影响应用程序的性能.<br>所有的JS对象都是在堆上进行分配的, <code>process.memoryUsage();</code> 返回<code>已经申请到的堆内存</code>,<code>已经使用的堆内存</code>,<code>进程的常住内存</code>.<br><code>node --max-old-space-size=1700 test.js</code> 单位MB <strong>设置老生代的最大值</strong><br><code>弄得--max-new-space-size=1024 test.js</code> 单位KB <strong>设置新生代内存空间的大小</strong></p>
 <a id="more"></a>
-<ul>
-<li><p>复制算法</p>
-<ul>
-<li>现有的内存空间分为2块, 每次只使用其中一块, 垃圾回收时将正在使用的内存中的存活对象复制到另一块内存中, 之后, 清除正在使用中的内存中的所有对象, 最后, 交换2个内存的角色, 完成垃圾收集</li>
-<li>垃圾对象很多, 存活对象不是很多</li>
-<li>内存对半</li>
-<li>JAVA新生代串行垃圾回收器, eden, from, to. from和to可以视为用于复制的2块大小相同的内存空间(survivor幸存者空间)</li>
-</ul>
-</li>
-<li><p>标记-压缩法(Mark-Compact)</p>
-<ul>
-<li>老年代更常见的情况是大部分对象都是存活对象</li>
-<li>这是一种老年代的回收算法, 在<strong>标记清除</strong>算法上进行了一些优化</li>
-<li>从根节点开始对可达到对象进行一次标记, 之后, <strong>将存活对象压缩到内存的一端</strong>, 再处理边界外的空间</li>
-</ul>
-</li>
-<li><p>增量算法</p>
-<ul>
-<li>垃圾回收时间过长, 会导致CPU消耗很高, APP挂起</li>
-<li>思想: 让GC线程和APP线程交替进行</li>
-<li>减少了系统的停顿时间, 但是带来了上下文的切换消耗, 会使得垃圾回收的成本增加, 造成系统吞吐量下降</li>
-</ul>
-</li>
-<li><p>分代</p>
-<ul>
-<li>将内存区间根据对象的特点分成几块, 使用不同的回收算法</li>
-<li>Hot Spot<ul>
-<li>将所有的新建对象都放入称为年轻代的内存区域, 年轻代的特点是对象会很快回收, 因此, 在年轻代就选择效率较高的复制算法</li>
-<li>新生代对象进入老生代, 老生代中的垃圾少, 回收代价低, 因此使用标记-压缩算法即可</li>
+<h5 id="V8_u7684_u5783_u573E_u56DE_u6536_u9650_u5236"><a href="#V8_u7684_u5783_u573E_u56DE_u6536_u9650_u5236" class="headerlink" title="V8的垃圾回收限制"></a>V8的垃圾回收限制</h5><ul>
+<li>V8主要的垃圾回收算法<ul>
+<li>分代式垃圾回收机制</li>
+<li>内存分代: 新生代, 老生代, <strong>V8堆的大小几乎==新生代 + 老生代</strong></li>
+<li>新生代内存: 64位系统下的限制内存大概是16M, 32位下大概是8M. <code>reserved_semispace_size</code></li>
+<li>Scavenge算法: 分代的基础上, 新生代算法实现是Cheney(其实就是<code>内存复制法</code>)</li>
+<li>新生代对象晋升条件: 经过Scavenge算法回收, To空间的内存占用比超过限制</li>
+<li>老生代回收: Mark-Sweep 标记回收算法 Mark-Compact 标记压缩算法</li>
 </ul>
 </li>
 </ul>
+<h5 id="u67E5_u770B_u5783_u573E_u56DE_u6536_u65E5_u5FD7"><a href="#u67E5_u770B_u5783_u573E_u56DE_u6536_u65E5_u5FD7" class="headerlink" title="查看垃圾回收日志"></a>查看垃圾回收日志</h5><p><code>node --trace_gc -e &quot;var a = []; for( var i = 0; i &lt; 1000000; i++ ) { a.push(new Array(100)); }&quot; &gt;&gt; gc.log</code> 从标准输出中打印垃圾回收日志</p>
+<p><code>node --prof</code> V8执行时的性能分析数据 获取<code>isolate-0x101804a00-v8.log</code><br><code>linux-tick-processor isolate-0x101804a00-v8.log</code></p>
+<h5 id="u9AD8_u6548_u4F7F_u7528_u5185_u5B58"><a href="#u9AD8_u6548_u4F7F_u7528_u5185_u5B58" class="headerlink" title="高效使用内存"></a>高效使用内存</h5><ul>
+<li>作用域 <strong>函数才会创建作用域</strong></li>
+<li>作用域链</li>
+<li>变量主动释放, <code>window.KM = undefined;</code></li>
+<li>闭包: 外部作用域访问内部作用域中变量的方法叫做闭包. <strong>会造成原始作用域内存不会被释放</strong></li>
+</ul>
+<h5 id="u5185_u5B58_u6307_u6807"><a href="#u5185_u5B58_u6307_u6807" class="headerlink" title="内存指标"></a>内存指标</h5><ul>
+<li>内存使用情况<ul>
+<li><code>process.memoryUsage();</code></li>
+<li><code>os.totalmem();</code> <code>os.freemem();</code> 返回系统的总内存和闲置内存</li>
+</ul>
 </li>
 </ul>
-<h5 id="u5783_u573E_u6536_u96C6_u5668_u7C7B_u578B"><a href="#u5783_u573E_u6536_u96C6_u5668_u7C7B_u578B" class="headerlink" title="垃圾收集器类型"></a>垃圾收集器类型</h5><ul>
-<li>按线程数分: 串行垃圾回收和并行垃圾回收</li>
-<li>按工作模式分: 并发式垃圾回收, 独占式垃圾回收(并发式与App交替进行)</li>
-<li>按碎片处理方式可分为压缩式垃圾回收器和非压缩式垃圾回收器:</li>
-<li>按工作的内存区间, 又可分为新生代垃圾回收器和老年代垃圾回收器:</li>
+<h5 id="u5806_u5916_u5185_u5B58"><a href="#u5806_u5916_u5185_u5B58" class="headerlink" title="堆外内存"></a>堆外内存</h5><ul>
+<li><code>process.memoryUsage().rss &gt; process.memoryUsage().heapTotal</code> 差值即为非V8分配的堆外内存</li>
+<li>Buffer分配在堆外内存上! 不受V8内存大小的限制</li>
 </ul>
-<h5 id="u7CFB_u7EDF_u6027_u80FD_u6307_u6807"><a href="#u7CFB_u7EDF_u6027_u80FD_u6307_u6807" class="headerlink" title="系统性能指标"></a>系统性能指标</h5><ul>
-<li>吞吐量: 在应用程序的生命周期内, 应用程序所花费的时间和系统总运行时间的比值. 总运行时间=GC耗时 + app耗时</li>
-<li>垃圾回收器负载: 和吞吐量相反, 垃圾回收器负载指来记回收器耗时与系统运行总时间的比值</li>
-<li>停顿时间: 垃圾回收器运行时, app的暂停时间</li>
-<li>垃圾回收频率: 垃圾收集器多久运行一次, 增大堆空间一般会减少频率次数, 但是可能会加大收集时间</li>
-<li>反应时间: 当一个对象被回收后, 多长时间, 它占据的内存会被释放</li>
-<li>堆分配: 合理的内存划分</li>
+<h5 id="u5185_u5B58_u6CC4_u9732"><a href="#u5185_u5B58_u6CC4_u9732" class="headerlink" title="内存泄露"></a>内存泄露</h5><ul>
+<li>缓存</li>
+<li>队列消费不及时</li>
+<li>作用域未释放</li>
+</ul>
+<h5 id="u5185_u5B58_u6CC4_u9732_u6392_u67E5"><a href="#u5185_u5B58_u6CC4_u9732_u6392_u67E5" class="headerlink" title="内存泄露排查"></a>内存泄露排查</h5><ul>
+<li>node-heapdump</li>
+<li>node-memwatch</li>
 </ul>
 
       
@@ -322,18 +257,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/07/24/Hibernate/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Hibernate N + 1, 二级缓存
-        
-      </div>
-    </a>
   
-  
-    <a href="/2014/12/28/js/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">悟透Javascript</div>
+    <a href="/2016/02/04/ReactReflux/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ReactReflux</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -349,7 +275,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="jvm-gc" data-title="JAVA虚拟机垃圾回收(GC)" data-url="http://yoursite.com/2015/07/22/jvm-gc/"></div>
+	<div class="ds-thread" data-thread-key="V8Mem" data-title="V8的垃圾回收机制与内存限制" data-url="http://yoursite.com/2016/02/16/V8Mem/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
