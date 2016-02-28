@@ -4,18 +4,30 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>悟透Javascript | KingDomPan&#39;s Secret Garden</title>
+  <title>Nodejs进程模块 | KingDomPan&#39;s Secret Garden</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前几日, 闲来无事, 阅读了下&amp;lt;悟透Javascript&amp;gt;这本书, 顺手记下了一些简单的在理解范围内的知识点.">
+  <meta name="description" content="创建子进程
+spawn()启动一个子进程来执行命令
+exec()启动一个子进程来执行命令, 带回调参数获知子进程的情况, 可指定进程运行的超时时间
+execFile()启动一个子进程来执行一个可执行文件, 可指定进程运行的超时时间
+fork() 与spawn()类似, 不同在于它创建的node子进程只需指定要执行的js文件模块即可12345678910// don&apos;t call this exam">
 <meta property="og:type" content="article">
-<meta property="og:title" content="悟透Javascript">
-<meta property="og:url" content="http://yoursite.com/2014/12/28/js/index.html">
+<meta property="og:title" content="Nodejs进程模块">
+<meta property="og:url" content="http://yoursite.com/2016/02/24/node-child-process/index.html">
 <meta property="og:site_name" content="KingDomPan's Secret Garden">
-<meta property="og:description" content="前几日, 闲来无事, 阅读了下&amp;lt;悟透Javascript&amp;gt;这本书, 顺手记下了一些简单的在理解范围内的知识点.">
-<meta property="og:updated_time" content="2016-01-14T03:56:43.000Z">
+<meta property="og:description" content="创建子进程
+spawn()启动一个子进程来执行命令
+exec()启动一个子进程来执行命令, 带回调参数获知子进程的情况, 可指定进程运行的超时时间
+execFile()启动一个子进程来执行一个可执行文件, 可指定进程运行的超时时间
+fork() 与spawn()类似, 不同在于它创建的node子进程只需指定要执行的js文件模块即可12345678910// don&apos;t call this exam">
+<meta property="og:updated_time" content="2016-02-28T07:28:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="悟透Javascript">
-<meta name="twitter:description" content="前几日, 闲来无事, 阅读了下&amp;lt;悟透Javascript&amp;gt;这本书, 顺手记下了一些简单的在理解范围内的知识点.">
+<meta name="twitter:title" content="Nodejs进程模块">
+<meta name="twitter:description" content="创建子进程
+spawn()启动一个子进程来执行命令
+exec()启动一个子进程来执行命令, 带回调参数获知子进程的情况, 可指定进程运行的超时时间
+execFile()启动一个子进程来执行一个可执行文件, 可指定进程运行的超时时间
+fork() 与spawn()类似, 不同在于它创建的node子进程只需指定要执行的js文件模块即可12345678910// don&apos;t call this exam">
   
   
     <link rel="icon" href="/favicon.png">
@@ -170,11 +182,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-js" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-node-child-process" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2014/12/28/js/" class="article-date">
-  	<time datetime="2014-12-28T09:21:14.000Z" itemprop="datePublished">2014-12-28</time>
+      <a href="/2016/02/24/node-child-process/" class="article-date">
+  	<time datetime="2016-02-24T15:12:43.000Z" itemprop="datePublished">2016-02-24</time>
 </a>
     </div>
   
@@ -187,7 +199,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      悟透Javascript
+      Nodejs进程模块
     </h1>
   
 
@@ -196,14 +208,10 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/child-porcess/">child-porcess</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
 	</div>
 
         
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Javascript/">Javascript</a>
-	</div>
-
 
         <div class="clearfix"></div>
       </div>
@@ -211,47 +219,50 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前几日, 闲来无事, 阅读了下&lt;悟透Javascript&gt;这本书, 顺手记下了一些简单的在理解范围内的知识点.</p>
+        <h4 id="u521B_u5EFA_u5B50_u8FDB_u7A0B"><a href="#u521B_u5EFA_u5B50_u8FDB_u7A0B" class="headerlink" title="创建子进程"></a>创建子进程</h4><ul>
+<li><code>spawn()</code>启动一个子进程来执行命令</li>
+<li><code>exec()</code>启动一个子进程来执行命令, 带回调参数获知子进程的情况, 可指定进程运行的超时时间</li>
+<li><code>execFile()</code>启动一个子进程来执行一个可执行文件, 可指定进程运行的超时时间</li>
+<li><code>fork()</code> 与<code>spawn()</code>类似, 不同在于它创建的node子进程只需指定要执行的js文件模块即可<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// don't call this example code</span></span><br><span class="line"><span class="keyword">var</span> cp = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line">cp.spawn(<span class="string">'node'</span>, [<span class="string">'work.js'</span>]);</span><br><span class="line">cp.exec(<span class="string">'node work.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, stdout, stderr</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// some code</span></span><br><span class="line">&#125;);</span><br><span class="line">cp.execFile(<span class="string">'work.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, stdout, stderr</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// some code</span></span><br><span class="line">&#125;);</span><br><span class="line">cp.fork(<span class="string">'./work.js'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 <a id="more"></a>
-<h5 id="u609F_u900FJavascript"><a href="#u609F_u900FJavascript" class="headerlink" title="悟透Javascript"></a>悟透Javascript</h5><ol>
-<li>undefined, null, number, string, boolean, object, function</li>
-<li>undefined, null, “”, 0, false 等价于 false; 其中 undefined == null</li>
-<li>NaN != NaN; Infinity / Infinity = NaN;</li>
-<li>object, function才有对象化的能力(组织数据和代码成为复杂结构)</li>
-<li>js的代码只有function一种形式</li>
-<li>js引擎的执行是一段一段的(预编译), 会先执行function定义的代码块, 再顺序执行其他</li>
-<li>代码执行的时刻与数据标识的结构形成了作用域的概念, 作用域是分割的</li>
-<li>原始的全局环境, 包含了一些预定义的对象, 对于浏览器环境来说, 就是window对象</li>
-<li>代码运行进行函数function会创造一个新的作用域, 作为当前作用域的子作用域<ul>
-<li>预分析, 将所有定义式函数直接创建为作用域上的函数变量</li>
-<li>解释执行代码, 在当前作用域查找函数或者变量, 没找到就到上层作用域查找</li>
-<li>因此, 如果前面的语句引用了后面定义的var变量, 该变量已经存在, 只是初值为undefined</li>
-<li>因此, var定义的变量只对当前的作用域有效, 尽管上层作用域有同名的东西, 都与本作用域无关</li>
+<h4 id="u8FDB_u7A0B_u95F4_u901A_u4FE1"><a href="#u8FDB_u7A0B_u95F4_u901A_u4FE1" class="headerlink" title="进程间通信"></a>进程间通信</h4><ul>
+<li>IPC: window下使用Named Pipe实现, Linux下使用Unix Domain Socket实现</li>
+<li>简单的API, 父进程取得n进行的句柄, 使用send方法向子进程发送消失, 同时监听message事件接收子进程发送过来的消息</li>
+<li>过程<ul>
+<li>父进程在创建子进程前创建IPC通道并监听, 用环境变量NODE_CHANNEL_FD告诉子进程的IPC的文件描述符</li>
+<li>子进程在启动的过程中连接IPC的FD</li>
+<li>IPC实际上也是Stream的抽象, 在系统内核就完成了进程间的通信</li>
 </ul>
 </li>
-<li>每次函数调用都会产生新的作用域, 随着函数栈形成作用域链</li>
-<li>调用上下文的信息<ul>
-<li>函数本身 (函数内部引用函数本身的标识符)</li>
-<li>函数的caller属性 (调用当前函数的上层函数, null表示没调用或者被全局代码调用)</li>
-<li>this (任意对象和function结合时的一个概念, 即function要服务的那个对象)</li>
-<li>arguments (使用数组的方式来访问参数, 尽管并非真正的数组)</li>
+</ul>
+<h4 id="u53E5_u67C4_u4F20_u9012"><a href="#u53E5_u67C4_u4F20_u9012" class="headerlink" title="句柄传递"></a>句柄传递</h4><ul>
+<li>一个进程只能监听一个端口</li>
+<li>子进程只能通过父进程进行请求转发(这样会浪费一倍的文件描述符[请求连接父进程])</li>
+<li>解决办法: send发送数据的时候传送句柄 <code>send(message[, sendHandle])</code></li>
+<li>父进程接收到socket后直接将这个socket传递给子进程处理<ul>
+<li>请求可以被父进程和子进程同时处理</li>
+<li>如果父进程的server关闭, 那么请求可以被子进程同事处理</li>
+<li>都基于绑定在同一个端口上的操作</li>
 </ul>
 </li>
-<li>eval函数执行的代码并不创建新的作用域, 只在当前的作用域执行, 可以访问到当前作用域的this和arguments等对象</li>
-<li><p>使用function定义对象(下面2段代码等价, js内部机制就是那么做的)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">newFunction</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> obj1 = <span class="keyword">new</span> newFunction();</span><br><span class="line"><span class="keyword">var</span> obj2 = <span class="keyword">new</span> newFunction;</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">newFunction</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> obj1 = &#123;&#125;;</span><br><span class="line">newFunction.call(obj1);<span class="comment">//将newFunction内部的this用obj1传递</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>每个对象都有自己的属性和方法空间, <code>obj1.say == obj2.say</code> 返回 false, 可以通过this定义一份唯一的逻辑体, 在构造对象的时候就能共享逻辑体, 于是就有了<code>prototype</code></p>
-</li>
-<li>所有function类型的对象都有一个<code>prototype</code>的属性, 这个属性又是一个对象, 可以任意的添加或者删除其他属性和方法, 通过该function构造出来的对象可以直接访问和调用. 也就是说<code>prototype</code>提供了一种同类对象之间共享属性和方法的机制</li>
-<li>js构造对象的过程 <code>var obj = new function();</code><ul>
-<li>建立一个对象</li>
-<li>将该对象内置的原型对象设置为构造函数prototype引用的那个对象(对象的原型对象对外是不可见的, 只有构造函数的原型才对象可见)</li>
-<li>将该对象作为this的参数调用构造函数, 完成成员的设置等初始化的功能</li>
+</ul>
+<h4 id="u53E5_u67C4_u7684_u53D1_u9001_u4E0E_u8FD8_u539F"><a href="#u53E5_u67C4_u7684_u53D1_u9001_u4E0E_u8FD8_u539F" class="headerlink" title="句柄的发送与还原"></a>句柄的发送与还原</h4><ul>
+<li>send方法可以发送的对象包括如下集中<ul>
+<li>net.Socket对象: TCP套接字</li>
+<li>net.Server对象: TCP服务器</li>
+<li>net.Native: C++层面的TCP套接字和IPC管道</li>
+<li>dgram.Socket: UDP套接字</li>
+<li>dgram.Native: C++层面的UDP套接字</li>
 </ul>
 </li>
-</ol>
+</ul>
+<h4 id="u7AEF_u53E3_u670D_u7528"><a href="#u7AEF_u53E3_u670D_u7528" class="headerlink" title="端口服用"></a>端口服用</h4><ul>
+<li>独立启动的TCP服务器拥有不同的文件描述符, 监听同一个端口失败</li>
+<li>句柄传送中, 传送的是一个相同文件描述符的server, 子进程按照此文件描述符进行还原, 达到端口复用</li>
+<li>文件描述符同一时间只能被一个端口使用, 这些进程是抢占式的服务</li>
+</ul>
 
       
     </div>
@@ -261,18 +272,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/07/22/jvm-gc/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/02/27/search-base/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          JAVA虚拟机垃圾回收(GC)
+          分布式垂直化搜索基础
         
       </div>
     </a>
   
   
-    <a href="/2014/12/14/HotReboot/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JRebel-告诉你什么是真正的热部署</div>
+    <a href="/2016/02/16/V8Mem/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">V8的垃圾回收机制与内存限制</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -288,7 +299,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="js" data-title="悟透Javascript" data-url="http://yoursite.com/2014/12/28/js/"></div>
+	<div class="ds-thread" data-thread-key="node-child-process" data-title="Nodejs进程模块" data-url="http://yoursite.com/2016/02/24/node-child-process/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
