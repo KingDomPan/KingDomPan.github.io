@@ -7,34 +7,22 @@
   <title>工作原理 | KingDomPan&#39;s Secret Garden</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="DNS域名解析
-
-浏览器检查缓存中有没有域名对应的解析过的IP地址(浏览器缓存大小和时间都有限制TTL属性)
-查找操作系统中是否有这个域名对应DNS解析结果(hosts文件)
-OS向网络配置中的DNS解析服务器进行查询(LDNS)
-LDNS没命中, 直接到Root Server域名服务器请求解析
-RServer返回给LDNS以个所查询的主域名服务器(gTLD Server – 顶级域名服务器com">
+HashMap内部原理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="工作原理">
 <meta property="og:url" content="http://yoursite.com/2016/03/14/theory/index.html">
 <meta property="og:site_name" content="KingDomPan's Secret Garden">
 <meta property="og:description" content="DNS域名解析
-
-浏览器检查缓存中有没有域名对应的解析过的IP地址(浏览器缓存大小和时间都有限制TTL属性)
-查找操作系统中是否有这个域名对应DNS解析结果(hosts文件)
-OS向网络配置中的DNS解析服务器进行查询(LDNS)
-LDNS没命中, 直接到Root Server域名服务器请求解析
-RServer返回给LDNS以个所查询的主域名服务器(gTLD Server – 顶级域名服务器com">
+HashMap内部原理">
 <meta property="og:image" content="http://yoursite.com/images/theory/dns.png">
-<meta property="og:updated_time" content="2016-03-14T03:38:26.000Z">
+<meta property="og:image" content="http://yoursite.com/images/theory/map.png">
+<meta property="og:image" content="http://yoursite.com/images/theory/put.png">
+<meta property="og:image" content="http://yoursite.com/images/theory/get.png">
+<meta property="og:updated_time" content="2016-03-14T05:21:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工作原理">
 <meta name="twitter:description" content="DNS域名解析
-
-浏览器检查缓存中有没有域名对应的解析过的IP地址(浏览器缓存大小和时间都有限制TTL属性)
-查找操作系统中是否有这个域名对应DNS解析结果(hosts文件)
-OS向网络配置中的DNS解析服务器进行查询(LDNS)
-LDNS没命中, 直接到Root Server域名服务器请求解析
-RServer返回给LDNS以个所查询的主域名服务器(gTLD Server – 顶级域名服务器com">
+HashMap内部原理">
   
   
     <link rel="icon" href="/favicon.png">
@@ -125,7 +113,7 @@ RServer返回给LDNS以个所查询的主域名服务器(gTLD Server – 顶级�
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/Akka/" style="font-size: 10px;">Akka</a> <a href="/tags/DNS/" style="font-size: 10px;">DNS</a> <a href="/tags/Data/" style="font-size: 16.67px;">Data</a> <a href="/tags/Fetch/" style="font-size: 10px;">Fetch</a> <a href="/tags/Fiddler/" style="font-size: 10px;">Fiddler</a> <a href="/tags/Finagle/" style="font-size: 10px;">Finagle</a> <a href="/tags/GC/" style="font-size: 10px;">GC</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/JRebel/" style="font-size: 10px;">JRebel</a> <a href="/tags/JS/" style="font-size: 13.33px;">JS</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Jpa/" style="font-size: 16.67px;">Jpa</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/N-1/" style="font-size: 10px;">N + 1</a> <a href="/tags/Nodejs/" style="font-size: 10px;">Nodejs</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/ReactJs/" style="font-size: 13.33px;">ReactJs</a> <a href="/tags/ReactRouter/" style="font-size: 10px;">ReactRouter</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Scala/" style="font-size: 16.67px;">Scala</a> <a href="/tags/Seesion/" style="font-size: 10px;">Seesion</a> <a href="/tags/Spring/" style="font-size: 20px;">Spring</a> <a href="/tags/Spring-Security-安全验证/" style="font-size: 10px;">Spring Security 安全验证</a> <a href="/tags/V8/" style="font-size: 10px;">V8</a> <a href="/tags/child-porcess/" style="font-size: 10px;">child-porcess</a> <a href="/tags/lucene/" style="font-size: 10px;">lucene</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/缓存/" style="font-size: 13.33px;">缓存</a>
+						<a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/Akka/" style="font-size: 10px;">Akka</a> <a href="/tags/DNS/" style="font-size: 10px;">DNS</a> <a href="/tags/Data/" style="font-size: 16.67px;">Data</a> <a href="/tags/Fetch/" style="font-size: 10px;">Fetch</a> <a href="/tags/Fiddler/" style="font-size: 10px;">Fiddler</a> <a href="/tags/Finagle/" style="font-size: 10px;">Finagle</a> <a href="/tags/GC/" style="font-size: 10px;">GC</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/JRebel/" style="font-size: 10px;">JRebel</a> <a href="/tags/JS/" style="font-size: 13.33px;">JS</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Jpa/" style="font-size: 16.67px;">Jpa</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/N-1/" style="font-size: 10px;">N + 1</a> <a href="/tags/Nodejs/" style="font-size: 10px;">Nodejs</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/ReactJs/" style="font-size: 13.33px;">ReactJs</a> <a href="/tags/ReactRouter/" style="font-size: 10px;">ReactRouter</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Scala/" style="font-size: 16.67px;">Scala</a> <a href="/tags/Seesion/" style="font-size: 10px;">Seesion</a> <a href="/tags/Spring/" style="font-size: 20px;">Spring</a> <a href="/tags/Spring-Security-安全验证/" style="font-size: 10px;">Spring Security 安全验证</a> <a href="/tags/V8/" style="font-size: 10px;">V8</a> <a href="/tags/child-porcess/" style="font-size: 10px;">child-porcess</a> <a href="/tags/lucene/" style="font-size: 10px;">lucene</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/缓存/" style="font-size: 13.33px;">缓存</a>
 					</div>
 				</section>
 				
@@ -215,7 +203,7 @@ RServer返回给LDNS以个所查询的主域名服务器(gTLD Server – 顶级�
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DNS/">DNS</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DNS/">DNS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HashMap/">HashMap</a></li></ul>
 	</div>
 
         
@@ -226,7 +214,12 @@ RServer返回给LDNS以个所查询的主域名服务器(gTLD Server – 顶级�
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="DNS_u57DF_u540D_u89E3_u6790"><a href="#DNS_u57DF_u540D_u89E3_u6790" class="headerlink" title="DNS域名解析"></a>DNS域名解析</h5><p><img src="/images/theory/dns.png" alt="DNS解析原理"></p>
+        <ul>
+<li>DNS域名解析</li>
+<li>HashMap内部原理</li>
+</ul>
+<a id="more"></a>
+<h4 id="DNS_u57DF_u540D_u89E3_u6790"><a href="#DNS_u57DF_u540D_u89E3_u6790" class="headerlink" title="DNS域名解析"></a>DNS域名解析</h4><p><img src="/images/theory/dns.png" alt="DNS解析原理"></p>
 <ol>
 <li>浏览器检查缓存中有没有域名对应的解析过的IP地址(浏览器缓存大小和时间都有限制TTL属性)</li>
 <li>查找操作系统中是否有这个域名对应DNS解析结果(hosts文件)</li>
@@ -238,6 +231,26 @@ RServer返回给LDNS以个所查询的主域名服务器(gTLD Server – 顶级�
 <li>Name Server 域名服务器会查询存储的域名和IP的对应关系</li>
 <li>在正常情况下回返回目标IP记录连同一个TTL值给LDNS, LDNS进行IP和域名的关系缓存</li>
 <li>LDNS把解析的域名返回给用户, 用户根据TTL值缓存在OS中</li>
+</ol>
+<h4 id="HashMap_u539F_u7406"><a href="#HashMap_u539F_u7406" class="headerlink" title="HashMap原理"></a>HashMap原理</h4><p><img src="/images/theory/map.png" alt="HashMap内存模型"></p>
+<ol>
+<li>初始化16大小的table数组, 每个数组对象都是Map.Entry类型</li>
+<li>初始化负载因子loadFactor大小为0.75</li>
+<li>每个Entry类型采用链表链接法来存放下一个对象</li>
+<li>对象的在数组中的索引位置根据key.hashCode的值再用hash函数计算出hash值, 在用indexFor计算出</li>
+</ol>
+<p><img src="/images/theory/put.png" alt="HashMap-put方法"></p>
+<ol>
+<li>对key做null检查, 如果为null就会被存储到table[0]中, 因为null的hash值总是为0</li>
+<li>key的hashcode会被调用, 用indexFor计算出对象在数组中的存储索引位置</li>
+<li>对相同的key, 进行hash值和key值的双重校验(不同key会有相同的hash值), 如果满足条件用新值覆盖旧值并返回旧值</li>
+<li>新值入索引位置后, 采用next指针进行链接</li>
+</ol>
+<p><img src="/images/theory/get.png" alt="HashMap-get方法"></p>
+<ol>
+<li>对key做null检查, 如果是null, 返回table[0]位置上的元素</li>
+<li>根据key做hash值, 再计算出index索引位置</li>
+<li>取出索引位置上的元素进行迭代, <strong>满足e.hash == hash &amp;&amp; (e.key == key || e.key.equals(key))</strong>则返回对应的值</li>
 </ol>
 
       
