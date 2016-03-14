@@ -4,34 +4,38 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>ReactJs生命周期 | KingDomPan&#39;s Secret Garden</title>
+  <title>ClassLoader工作机制 | KingDomPan&#39;s Secret Garden</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="生命周期方法
-最佳实践
+  <meta name="description" content="ClassLoader加载机制
+将Class加载到JVM中
+审核每个类应该由谁来加载
 
-componentWillReceiveProps 接收p触发, 可以更新ps, 不会触发render
-componentWillUpdate 接收到新的ps触发, 不可以更新ps
-componentDidUpdate 组件更新到render后触发, 完成之后可以更新dom">
+ClassLoader类结构分析
+Class&amp;lt;?&amp;gt; defineClass(byte[]. int, int) 将字节流解析成JVM能够识别的Class对象(意味着可以通过其他方式比如网络来生成Class对象)
+Class&amp;lt;?&amp;gt; findClass(String) 实现类的加载规则, 取">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ReactJs生命周期">
-<meta property="og:url" content="http://yoursite.com/2015/12/02/ReactJsLifecycle/index.html">
+<meta property="og:title" content="ClassLoader工作机制">
+<meta property="og:url" content="http://yoursite.com/2016/03/14/class/index.html">
 <meta property="og:site_name" content="KingDomPan's Secret Garden">
-<meta property="og:description" content="生命周期方法
-最佳实践
+<meta property="og:description" content="ClassLoader加载机制
+将Class加载到JVM中
+审核每个类应该由谁来加载
 
-componentWillReceiveProps 接收p触发, 可以更新ps, 不会触发render
-componentWillUpdate 接收到新的ps触发, 不可以更新ps
-componentDidUpdate 组件更新到render后触发, 完成之后可以更新dom">
-<meta property="og:image" content="http://yoursite.com/images/ReactJs/Lifecycle.png">
-<meta property="og:updated_time" content="2016-01-16T14:07:32.000Z">
+ClassLoader类结构分析
+Class&amp;lt;?&amp;gt; defineClass(byte[]. int, int) 将字节流解析成JVM能够识别的Class对象(意味着可以通过其他方式比如网络来生成Class对象)
+Class&amp;lt;?&amp;gt; findClass(String) 实现类的加载规则, 取">
+<meta property="og:image" content="http://yoursite.com/images/class/classloader.png">
+<meta property="og:image" content="http://yoursite.com/images/class/tomcat-classloader.png">
+<meta property="og:updated_time" content="2016-03-14T13:49:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ReactJs生命周期">
-<meta name="twitter:description" content="生命周期方法
-最佳实践
+<meta name="twitter:title" content="ClassLoader工作机制">
+<meta name="twitter:description" content="ClassLoader加载机制
+将Class加载到JVM中
+审核每个类应该由谁来加载
 
-componentWillReceiveProps 接收p触发, 可以更新ps, 不会触发render
-componentWillUpdate 接收到新的ps触发, 不可以更新ps
-componentDidUpdate 组件更新到render后触发, 完成之后可以更新dom">
+ClassLoader类结构分析
+Class&amp;lt;?&amp;gt; defineClass(byte[]. int, int) 将字节流解析成JVM能够识别的Class对象(意味着可以通过其他方式比如网络来生成Class对象)
+Class&amp;lt;?&amp;gt; findClass(String) 实现类的加载规则, 取">
   
   
     <link rel="icon" href="/favicon.png">
@@ -186,11 +190,11 @@ componentDidUpdate 组件更新到render后触发, 完成之后可以更新dom">
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-ReactJsLifecycle" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-class" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/02/ReactJsLifecycle/" class="article-date">
-  	<time datetime="2015-12-02T12:44:39.000Z" itemprop="datePublished">2015-12-02</time>
+      <a href="/2016/03/14/class/" class="article-date">
+  	<time datetime="2016-03-14T13:42:40.000Z" itemprop="datePublished">2016-03-14</time>
 </a>
     </div>
   
@@ -203,7 +207,7 @@ componentDidUpdate 组件更新到render后触发, 完成之后可以更新dom">
         
   
     <h1 class="article-title" itemprop="name">
-      ReactJs生命周期
+      ClassLoader工作机制
     </h1>
   
 
@@ -212,14 +216,10 @@ componentDidUpdate 组件更新到render后触发, 完成之后可以更新dom">
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactJs/">ReactJs</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ClassLoader/">ClassLoader</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/">JAVA</a></li></ul>
 	</div>
 
         
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/ReactJs/">ReactJs</a>
-	</div>
-
 
         <div class="clearfix"></div>
       </div>
@@ -227,43 +227,46 @@ componentDidUpdate 组件更新到render后触发, 完成之后可以更新dom">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="u751F_u547D_u5468_u671F_u65B9_u6CD5"><a href="#u751F_u547D_u5468_u671F_u65B9_u6CD5" class="headerlink" title="生命周期方法"></a>生命周期方法</h5><ul>
-<li><p>最佳实践</p>
+        <h4 id="ClassLoader_u52A0_u8F7D_u673A_u5236"><a href="#ClassLoader_u52A0_u8F7D_u673A_u5236" class="headerlink" title="ClassLoader加载机制"></a>ClassLoader加载机制</h4><ul>
+<li>将Class加载到JVM中</li>
+<li>审核每个类应该由谁来加载</li>
+</ul>
+<h5 id="ClassLoader_u7C7B_u7ED3_u6784_u5206_u6790"><a href="#ClassLoader_u7C7B_u7ED3_u6784_u5206_u6790" class="headerlink" title="ClassLoader类结构分析"></a>ClassLoader类结构分析</h5><ul>
+<li><code>Class&lt;?&gt; defineClass(byte[]. int, int)</code> 将字节流解析成JVM能够识别的Class对象(意味着可以通过其他方式比如网络来生成Class对象)</li>
+<li><code>Class&lt;?&gt; findClass(String)</code> 实现类的加载规则, 取得要加载类的字节码, 再调用defineClass</li>
+<li><code>Class&lt;?&gt; loadClass(String)</code></li>
+<li><code>void resolveClass(Class&lt;?&gt;)</code></li>
+</ul>
+<a id="more"></a>
+<h5 id="ClassLoader_u7684_u7B49_u7EA7_u52A0_u8F7D_u673A_u5236"><a href="#ClassLoader_u7684_u7B49_u7EA7_u52A0_u8F7D_u673A_u5236" class="headerlink" title="ClassLoader的等级加载机制"></a>ClassLoader的等级加载机制</h5><ul>
+<li>上级委托接待机制</li>
+<li>Bootstrap ClassLoader: 加载JVM自身工作的类, 完全由JVM自己控制, 没有更高一级的父加载器, 也没有子加载器</li>
+<li>ExtClassLoader: JVM自身的一部分, 加载JVM的扩展类库 <code>System.getProperty(&quot;java.ext.dirs&quot;)</code></li>
+<li>AppClassLoader: 父类是ExtClassLoader, 所有在<code>system.getproperty(&quot;java.class.path&quot;)</code>目录下的类都被这个加载器加载(classpath)</li>
+<li>自定义类加载器(URLClassLoader): 父加载器都是AppClassLoader</li>
+</ul>
+<h5 id="u5982_u4F55_u52A0_u8F7Dclass_u6587_u4EF6"><a href="#u5982_u4F55_u52A0_u8F7Dclass_u6587_u4EF6" class="headerlink" title="如何加载class文件"></a>如何加载class文件</h5><p><img src="/images/class/classloader.png" alt="How To Load Class"></p>
+<ol>
+<li>找到.class文件并把这个文件包含的字节码加载到内存中<br> 1.1 <code>URLClassLoader -&gt; URLClassPath -&gt; URL(表示classpath)</code> 最终创建FileLoader或者JarLoader, 或者使用默认的加载器, 使用findClass()加载class到内存中</li>
+<li>字节码验证, class类数据结构分析和内存分配, 符号表链接<br> 2.1 字节码验证: 类装入器对于类的字节码要做许多检测, 以确保格式正确, 行为正确<br> 2.2 类准备: 在这个阶段准备代表每个类中定义的字段, 方法和实现接口所必须的数据结构<br> 2.3 解析: 在这个阶段类装入器装入类所引用的其他所有类, 可以用许多方式引用类, 如超类, 接口, 字段, 方法签名, 方法中的本地变量</li>
+<li>类中的静态属性和初始化赋值, 静态块的执行<br> 3.1 在类中包含的静态初始化器都被执行, 在这个阶段未被初始化的静态字段被初始化为默认值</li>
+</ol>
+<h5 id="u5E38_u89C1_u52A0_u8F7D_u7C7B_u9519_u8BEF_u5206_u6790"><a href="#u5E38_u89C1_u52A0_u8F7D_u7C7B_u9519_u8BEF_u5206_u6790" class="headerlink" title="常见加载类错误分析"></a>常见加载类错误分析</h5><ol>
+<li>ClassNotFoundException: JVM要加载指定类的class文件时没找到指定的class文件, 检查当时的classpath. <code>this.getClass().getClassLoader().getResource(&quot;&quot;).toString()</code><br> 1.1 <code>Class.forName()</code><br> 1.2 <code>ClassLoader.loadClass()</code><br> 1.3 <code>ClassLoader.findSystemClass()</code></li>
+<li>NoClassDefFoundException: 触发JVM隐式加载某些类时发现这些类不存在的异常(确保每个被引用的类都在classpath下)<br> 2.1 new 关键字<br> 2.2 属性引用某个类<br> 2.3 继承了某个接口或者类<br> 2.4 方法的某个参数中引用了某个类</li>
+<li>ClassCashException: 程序中出现强直类型转换时出现这个错误(显式指定数据类型或者使用instanceof进行类型判断)<br> 3.1 对于普通类型, 对象必须是目标类型或者是目标类型的子类的实例<br> 3.2 对于数组类型, 目标类必须是数组类型或者<code>java.lang.Object, java.lang.Cloneable, java.lang.Serializable</code></li>
+</ol>
+<h5 id="u5E38_u7528_u7684ClassLoader_u5206_u6790"><a href="#u5E38_u7528_u7684ClassLoader_u5206_u6790" class="headerlink" title="常用的ClassLoader分析"></a>常用的ClassLoader分析</h5><p><img src="/images/class/tomcat-classloader.png" alt="Tomcat-ClassLoader"></p>
 <ul>
-<li><code>componentWillReceiveProps</code> 接收p触发, 可以更新ps, 不会触发render</li>
-<li><code>componentWillUpdate</code> 接收到新的ps触发, 不可以更新ps</li>
-<li><code>componentDidUpdate</code> 组件更新到render后触发, 完成之后可以更新dom<a id="more"></a>
-</li>
-</ul>
-</li>
-<li><p>实例化</p>
-<ul>
-<li><code>getDefaultProps</code> 对于组件类来说, 这个方法只会调用一次</li>
-<li><code>getInitualState</code> 每个实例初始化都会调用一次, 可以使用<code>this.props</code></li>
-<li><code>componentWillMount</code> 首次渲染前调用, 修改state的最后机会</li>
-<li><code>render</code> 创建虚拟DOM, 标识组件的输出<ul>
-<li>只能通过<code>this.props</code>和<code>this.state</code>访问数据</li>
-<li>可以返回null, false或者任何React组件</li>
-<li>只能出现一个顶级组件(不能返回一组元素)</li>
-<li>必须纯净, 意味着不能改变组件的状态或者修改DOM的输出</li>
-</ul>
-</li>
-<li><code>componentDidMount</code> render之后并且<code>真实的DOM</code>被渲染之后</li>
-</ul>
-</li>
-<li>存在期<ul>
-<li><code>componentWillReceiveProps(nextProps)</code> 在任意时刻, 组件的props可以通过父辈的组件来更改, 获得更新props及更新state对象的机会, 传入<code>nextProps</code>对象参数, 初始化渲染的时候不会进行调用此方法, 在方法里面调用<code>this.setState()</code>不会触发<code>render</code>方法, 旧的属性使用<code>this.props.XX</code>来获取</li>
-<li><code>shouldComponentUpdate(nextProps, nextState)</code> 某个组件或者它的任何子组件不需要渲染新的p&amp;s, 返回false, 返回false是告诉react跳过render, componentWillUpdate, componentDidUpdate</li>
-<li><code>componentWillUpdate(nextProps, nextState)</code> 组件在接收到新的props和state进行渲染之前,  不可以该方法中更新p&amp;s</li>
-<li><code>componentDidUpdate(prevProps, prevState)</code> 更新渲染好的dom的机会</li>
-</ul>
-</li>
-<li><p>销毁期</p>
-<ul>
-<li><code>componentWillUnmount</code> 组件从层级中移除的时候</li>
-</ul>
-</li>
-<li><p>生命周期图<br><img src="/images/ReactJs/Lifecycle.png" alt="ReactJs生命周期"></p>
+<li>Bootstrap类的<code>initClassLoaders</code>方法中通过ClassLoaderFactory的createClassLoader方法创建StandardClassLoader</li>
+<li>StandardClassLoader实际上只是代理了AppClassLoader进行Class的加载, 所以Tomcat的架构中的类加载器还是AppClassLoader</li>
+<li>StandardClassLoader要负责加载Tomcal容器中自己的ClassPath位置的类</li>
+<li>Web应用程序中的类是如何被Tomcat加载进来??<ol>
+<li>一个App在Tomcat中由一个StandardContext表示并来解析web.xml中的J2EE Web规范的对象</li>
+<li>StandardContext.startInternal()初始化时会检测loader属性是否存在. 不存在就使用getParentClassLoader()创建</li>
+<li>WebAppLoader -&gt; WebAppClassLoader &lt;- StandardWrapper.loadServlet() -&gt; InstanceManager</li>
+<li>WebappClassLoader覆盖了父类的loadClass()方法使用了自己的类加载机制</li>
+</ol>
 </li>
 </ul>
 
@@ -275,18 +278,9 @@ componentDidUpdate 组件更新到render后触发, 完成之后可以更新dom">
     
 <nav id="article-nav">
   
-    <a href="/2015/12/04/ReactRouter/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          ReactRouter
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/11/12/PromiseFetch/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Promise及Fetch源码解析</div>
+    <a href="/2016/03/14/theory/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">工作原理</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -302,7 +296,7 @@ componentDidUpdate 组件更新到render后触发, 完成之后可以更新dom">
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="ReactJsLifecycle" data-title="ReactJs生命周期" data-url="http://yoursite.com/2015/12/02/ReactJsLifecycle/"></div>
+	<div class="ds-thread" data-thread-key="class" data-title="ClassLoader工作机制" data-url="http://yoursite.com/2016/03/14/class/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
