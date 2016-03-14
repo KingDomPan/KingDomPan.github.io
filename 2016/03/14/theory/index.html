@@ -4,17 +4,37 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Category: Javascript | KingDomPan&#39;s Secret Garden</title>
+  <title>工作原理 | KingDomPan&#39;s Secret Garden</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="码农的秘密花园全是是有码!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="KingDomPan's Secret Garden">
-<meta property="og:url" content="http://yoursite.com/categories/Javascript/index.html">
+  <meta name="description" content="DNS域名解析
+
+浏览器检查缓存中有没有域名对应的解析过的IP地址(浏览器缓存大小和时间都有限制TTL属性)
+查找操作系统中是否有这个域名对应DNS解析结果(hosts文件)
+OS向网络配置中的DNS解析服务器进行查询(LDNS)
+LDNS没命中, 直接到Root Server域名服务器请求解析
+RServer返回给LDNS以个所查询的主域名服务器(gTLD Server – 顶级域名服务器com">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工作原理">
+<meta property="og:url" content="http://yoursite.com/2016/03/14/theory/index.html">
 <meta property="og:site_name" content="KingDomPan's Secret Garden">
-<meta property="og:description" content="码农的秘密花园全是是有码!">
+<meta property="og:description" content="DNS域名解析
+
+浏览器检查缓存中有没有域名对应的解析过的IP地址(浏览器缓存大小和时间都有限制TTL属性)
+查找操作系统中是否有这个域名对应DNS解析结果(hosts文件)
+OS向网络配置中的DNS解析服务器进行查询(LDNS)
+LDNS没命中, 直接到Root Server域名服务器请求解析
+RServer返回给LDNS以个所查询的主域名服务器(gTLD Server – 顶级域名服务器com">
+<meta property="og:image" content="http://yoursite.com/images/theory/dns.png">
+<meta property="og:updated_time" content="2016-03-14T03:38:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KingDomPan's Secret Garden">
-<meta name="twitter:description" content="码农的秘密花园全是是有码!">
+<meta name="twitter:title" content="工作原理">
+<meta name="twitter:description" content="DNS域名解析
+
+浏览器检查缓存中有没有域名对应的解析过的IP地址(浏览器缓存大小和时间都有限制TTL属性)
+查找操作系统中是否有这个域名对应DNS解析结果(hosts文件)
+OS向网络配置中的DNS解析服务器进行查询(LDNS)
+LDNS没命中, 直接到Root Server域名服务器请求解析
+RServer返回给LDNS以个所查询的主域名服务器(gTLD Server – 顶级域名服务器com">
   
   
     <link rel="icon" href="/favicon.png">
@@ -169,57 +189,102 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-theory" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2014" class="archive-year">2014</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2014/12/28/js/" class="archive-article-date">
-  	<time datetime="2014-12-28T09:21:14.000Z" itemprop="datePublished">12月 28</time>
+    <div class="article-meta">
+      <a href="/2016/03/14/theory/" class="article-date">
+  	<time datetime="2016-03-14T03:23:35.000Z" itemprop="datePublished">2016-03-14</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2014/12/28/js/">悟透Javascript</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      工作原理
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DNS/">DNS</a></li></ul>
 	</div>
 
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Javascript/">Javascript</a>
-	</div>
+        
 
-
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
+      </div>
+      
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="DNS_u57DF_u540D_u89E3_u6790"><a href="#DNS_u57DF_u540D_u89E3_u6790" class="headerlink" title="DNS域名解析"></a>DNS域名解析</h5><p><img src="/images/theory/dns.png" alt="DNS解析原理"></p>
+<ol>
+<li>浏览器检查缓存中有没有域名对应的解析过的IP地址(浏览器缓存大小和时间都有限制TTL属性)</li>
+<li>查找操作系统中是否有这个域名对应DNS解析结果(hosts文件)</li>
+<li>OS向网络配置中的DNS解析服务器进行查询(LDNS)</li>
+<li>LDNS没命中, 直接到Root Server域名服务器请求解析</li>
+<li>RServer返回给LDNS以个所查询的主域名服务器(gTLD Server – 顶级域名服务器com cn org)</li>
+<li>LDNS向gTLD服务器发送请求</li>
+<li>接受请求的gTLD服务器查找并返回此域名对应的Name Server域名服务器的地址, 这个Name Server就是域名的注册服务器</li>
+<li>Name Server 域名服务器会查询存储的域名和IP的对应关系</li>
+<li>在正常情况下回返回目标IP记录连同一个TTL值给LDNS, LDNS进行IP和域名的关系缓存</li>
+<li>LDNS把解析的域名返回给用户, 用户根据TTL值缓存在OS中</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/02/27/search-base/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">分布式垂直化搜索基础</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="theory" data-title="工作原理" data-url="http://yoursite.com/2016/03/14/theory/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"KingDomPan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 </div>
       <footer id="footer">
@@ -245,10 +310,10 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false
 	}
 </script>
