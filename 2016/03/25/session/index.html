@@ -4,17 +4,31 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Tag: HTTP | KingDomPan&#39;s Secret Garden</title>
+  <title>分布式session | KingDomPan&#39;s Secret Garden</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="码农的秘密花园全是有码!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="KingDomPan's Secret Garden">
-<meta property="og:url" content="http://yoursite.com/tags/HTTP/index.html">
+  <meta name="description" content="分布式缓存
+Replication Session(Session复制): 将一台机器上的Session数据广播复制到集群中的其他机器上
+Sticky Session(粘性Session): 同一个会话中的请求必须被转发到同一个节点上
+缓存集中式管理: 将Session存入分布式缓存集群中的某台机器上, 当用户访问不同节点时先从缓存中拿Session数据
+Not Sticky Session(非粘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式session">
+<meta property="og:url" content="http://yoursite.com/2016/03/25/session/index.html">
 <meta property="og:site_name" content="KingDomPan's Secret Garden">
-<meta property="og:description" content="码农的秘密花园全是有码!">
+<meta property="og:description" content="分布式缓存
+Replication Session(Session复制): 将一台机器上的Session数据广播复制到集群中的其他机器上
+Sticky Session(粘性Session): 同一个会话中的请求必须被转发到同一个节点上
+缓存集中式管理: 将Session存入分布式缓存集群中的某台机器上, 当用户访问不同节点时先从缓存中拿Session数据
+Not Sticky Session(非粘">
+<meta property="og:image" content="http://yoursite.com/images/session/session.png">
+<meta property="og:updated_time" content="2016-03-25T09:30:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KingDomPan's Secret Garden">
-<meta name="twitter:description" content="码农的秘密花园全是有码!">
+<meta name="twitter:title" content="分布式session">
+<meta name="twitter:description" content="分布式缓存
+Replication Session(Session复制): 将一台机器上的Session数据广播复制到集群中的其他机器上
+Sticky Session(粘性Session): 同一个会话中的请求必须被转发到同一个节点上
+缓存集中式管理: 将Session存入分布式缓存集群中的某台机器上, 当用户访问不同节点时先从缓存中拿Session数据
+Not Sticky Session(非粘">
   
   
     <link rel="icon" href="/favicon.png">
@@ -165,57 +179,119 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-session" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2014" class="archive-year">2014</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2014/12/09/Fiddler/" class="archive-article-date">
-  	<time datetime="2014-12-09T11:04:06.000Z" itemprop="datePublished">12月 9</time>
+    <div class="article-meta">
+      <a href="/2016/03/25/session/" class="article-date">
+  	<time datetime="2016-03-25T09:24:40.000Z" itemprop="datePublished">2016-03-25</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2014/12/09/Fiddler/">基于Fiddler的前端调试技术</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      分布式session
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fiddler/">Fiddler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/">JS</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/session/">session</a></li></ul>
 	</div>
 
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/HTTP/">HTTP</a>
-	</div>
+        
 
-
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
+      </div>
+      
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="u5206_u5E03_u5F0F_u7F13_u5B58"><a href="#u5206_u5E03_u5F0F_u7F13_u5B58" class="headerlink" title="分布式缓存"></a>分布式缓存</h4><ul>
+<li><code>Replication Session</code>(<code>Session</code>复制): 将一台机器上的<code>Session</code>数据广播复制到集群中的其他机器上</li>
+<li><code>Sticky Session</code>(粘性<code>Session</code>): 同一个会话中的请求必须被转发到同一个节点上</li>
+<li>缓存集中式管理: 将<code>Session</code>存入分布式缓存集群中的某台机器上, 当用户访问不同节点时先从缓存中拿<code>Session</code>数据</li>
+<li><code>Not Sticky Session</code>(非粘性会话): 每一次请求都可能转发到不同节点</li>
+</ul>
+<a id="more"></a>
+<h4 id="Memcached-Session-Manager"><a href="#Memcached-Session-Manager" class="headerlink" title="Memcached-Session-Manager"></a>Memcached-Session-Manager</h4><ul>
+<li>支持<code>粘性会话</code>和<code>非粘性会话</code></li>
+<li>没有单点故障</li>
+<li>能处理<code>tomcat</code>故障转移</li>
+<li>能处理<code>memcached</code>故障转移</li>
+<li>可插拔</li>
+<li>允许异步存储<code>session</code></li>
+<li><code>session</code>被修改时, 才会发给<code>Memcache</code></li>
+</ul>
+<h4 id="MSM_u7684_u7C98_u6027_u6A21_u5F0F_u539F_u7406"><a href="#MSM_u7684_u7C98_u6027_u6A21_u5F0F_u539F_u7406" class="headerlink" title="MSM的粘性模式原理"></a>MSM的粘性模式原理</h4><ol>
+<li><code>Tomcat</code>为主<code>Session</code>, <code>Memcache</code>为副本<code>Session</code></li>
+<li>请求到来时使用主<code>Session</code>, 若是有修改同步到副本<code>Session</code></li>
+<li><code>Tomcat</code>挂了之后, 其他<code>Tomcat</code>从<code>Memcache</code>中查询<code>Session</code></li>
+</ol>
+<h4 id="MSM_u7684_u975E_u7C98_u6027_u6A21_u5F0F_u539F_u7406"><a href="#MSM_u7684_u975E_u7C98_u6027_u6A21_u5F0F_u539F_u7406" class="headerlink" title="MSM的非粘性模式原理"></a>MSM的非粘性模式原理</h4><ol>
+<li><code>Tomcat</code>为中转<code>Session</code>, M1为<code>主Session</code>, M2为<code>备用Session</code></li>
+<li>请求到来, 从<code>M2--&gt;M1</code>的顺序加载Session</li>
+<li><code>Session</code>变化同步到<code>Memcache</code>, 清除<code>Tomcat</code>的<code>Session</code></li>
+</ol>
+<h4 id="u57FA_u4E8EKryo_u7684_u5E8F_u5217_u5316_u65B9_u6848"><a href="#u57FA_u4E8EKryo_u7684_u5E8F_u5217_u5316_u65B9_u6848" class="headerlink" title="基于Kryo的序列化方案"></a>基于Kryo的序列化方案</h4><h4 id="u57FA_u4E8EZooKeeper_u96C6_u7FA4_u7684_u5206_u5E03_u5F0FSession_u65B9_u6848"><a href="#u57FA_u4E8EZooKeeper_u96C6_u7FA4_u7684_u5206_u5E03_u5F0FSession_u65B9_u6848" class="headerlink" title="基于ZooKeeper集群的分布式Session方案"></a>基于<code>ZooKeeper</code>集群的分布式Session方案</h4><ul>
+<li>解决基于Memcache方法的数据丢失问题, 引入ZK的持久化存储介质</li>
+<li>ZK的一致性复制(在多个副本间保证数据的强一致性)和容错能力<br><img src="/images/session/session.png" alt="ZK-Session-持久化"></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/21/docker/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Docker技术架构</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="session" data-title="分布式session" data-url="http://yoursite.com/2016/03/25/session/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"KingDomPan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 </div>
       <footer id="footer">
@@ -241,9 +317,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false
 	}
